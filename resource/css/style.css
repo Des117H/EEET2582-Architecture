@@ -1,0 +1,14 @@
+*{ 
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+}
+
+:root {
+    --text: #111;
+    --primary: #3A4D39;
+    --se_primary: #739072;
+    --theme: #ECE3CE;
+  }
+  
