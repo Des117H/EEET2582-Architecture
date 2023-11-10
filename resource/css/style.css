@@ -3,6 +3,37 @@
 	src: url(domine-regular.woff);
 }
 
+.icon {
+	width: 25px;
+	height: 25px;
+}
+
+.header-div {
+	display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+	border-bottom: var(--text) 1px solid;
+	padding-bottom: 5px;
+	margin: 10px;
+}
+
+.logo-div {
+	display: flex;
+	align-items: center;
+}
+
+.circle-logo {
+	width: 50px;
+}
+.name-logo {
+	height: 25px;
+	margin-left: 10px;
+}
+
+.body-div {
+	margin: 10px;
+}
+
 * {
 	margin: 0;
 	padding: 0;
