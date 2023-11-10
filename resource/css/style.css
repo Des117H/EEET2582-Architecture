@@ -24,7 +24,7 @@
   border: 2px solid var(--primary);
   border-radius: 8px;
   box-sizing: border-box;
-  color: var(--text);
+  color: var(--primary);
   cursor: pointer;
   display: inline-block;
   font-family: Circular,-apple-system,BlinkMacSystemFont,Roboto,"Helvetica Neue",sans-serif;
@@ -33,7 +33,7 @@
   line-height: 20px;
   margin: 0;
   outline: none;
-  padding: 13px 23px;
+  padding: 10px 20px;
   position: relative;
   text-align: center;
   text-decoration: none;
@@ -61,4 +61,40 @@
   color: #DDDDDD;
   cursor: not-allowed;
   opacity: 1;
+}
+
+.se_button {
+  background: var(--se_primary);
+  border: 2px solid var(--primary);
+  border-radius: 6px;
+  box-shadow: rgba(0, 0, 0, 0.1) 1px 2px 4px;
+  box-sizing: border-box;
+  color: #FFFFFF;
+  cursor: pointer;
+  display: inline-block;
+  font-family: nunito,roboto,proxima-nova,"proxima nova",sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 20px;
+  min-height: 40px;
+  outline: 0;
+  padding: 10px 20px;
+  text-align: center;
+  text-rendering: geometricprecision;
+  text-transform: none;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  vertical-align: middle;
+}
+
+.se_button:hover,
+.se_button:active {
+  background-color: initial;
+  background-position: 0 0;
+  color: var(--primary);
+}
+
+.se_button:active {
+  opacity: .5;
 }
