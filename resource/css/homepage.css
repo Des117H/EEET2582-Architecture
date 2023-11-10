@@ -1,0 +1,17 @@
+.body-div {
+	display: flex;
+	flex-direction: column;
+}
+
+.left-body-div, .right-body-div {
+	border: 2px solid red;
+	margin: 15px 0px;
+}
+
+.left-body-div {
+	width: 30%;
+}
+
+.right-body-div {
+	width: 70%;
+}
