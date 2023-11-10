@@ -3,9 +3,18 @@
 	src: url(domine-regular.woff);
 }
 
+:root {
+	--text: #111;
+	--white: #fff;
+	--primary: #3A4D39;
+	--se_primary: #739072;
+	--theme: #ECE3CE;
+}
+
+
 .icon {
-	width: 25px;
-	height: 25px;
+	width: 40px;
+	height: 40px;
 }
 
 .header-div {
@@ -39,14 +48,6 @@
 	padding: 0;
 	border: 0;
 	font-size: 100%;
-}
-
-:root {
-	--text: #111;
-	--white: #fff;
-	--primary: #3A4D39;
-	--se_primary: #739072;
-	--theme: #ECE3CE;
 }
 
 .content {
