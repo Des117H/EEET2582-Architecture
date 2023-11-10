@@ -21,7 +21,7 @@
 /* CSS */
 .button {
   background-color: var(--white);
-  border: 1px solid var(--primary);
+  border: 2px solid var(--primary);
   border-radius: 8px;
   box-sizing: border-box;
   color: var(--text);
@@ -50,13 +50,14 @@
 }
 
 .button:active {
-  background-color: #F7F7F7;
-  border-color: #000000;
+  background-color: var(--se_primary);
+  border-color: var(--theme);
+  color: var(--theme);
   transform: scale(.96);
 }
 
 .button:disabled {
-  border-color: #DDDDDD;
+  border-color: var(--theme);
   color: #DDDDDD;
   cursor: not-allowed;
   opacity: 1;
