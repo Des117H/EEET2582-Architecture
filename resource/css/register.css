@@ -1,5 +1,5 @@
 #header {
-    height: 75px;
+    /* height: 75px; */
     background-color: var(--theme);
 }
 
@@ -11,65 +11,53 @@
     align-items: center;
     padding: 10px;
     */
+    width: 100%;
+    margin: 0;
+    padding: 0;
 }
 
 .imgcontainer {
-    position: relative;
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
 }
 
 #backgroundimg1,
 #backgroundimg2 {
-    width: 700px;
-    height: 700px;
+    width: 35%;
+    height: 100vh;
 }
 
-#backgroundimg1 {
-    float: left;
-}
-
-#backgroundimg2 {
-    float: right;
+#logo {
+    margin-top: 10px;
+    width: 30vh;
 }
 
 #texttopform {
     text-align: center;
+    margin-bottom: 5px;
 }
 
 .container {
-    max-width: 700px;
-    width: 100%;
-    background: #fff;
-    padding: 25px 30px;
-    border-radius: 25px;
-}
-
-.container .title {
-    font-size: 25px;
-    font-weight: 500;
-    position: relative;
-}
-
-.container form .details {
-    /*display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;*/
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 10%;
-    margin-left: auto;
-    margin-right: auto;
-    width: 30%;
-    border-radius: 25px;
-    border: 1px solid #ccc;
-
+    display: flex;
+    flex-direction: column;
     justify-content: space-between;
     align-items: center;
 }
 
+.container form .details {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10vh;
+}
+
 form .details .input-box {
-    width: calc(100% / 2 - 20px);
-    margin: 20px 0 12px 0;
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .details .input-box .details {
@@ -95,12 +83,5 @@ form .details .input-box {
     border: none;
     cursor: pointer;
     width: 100%;
-}
 
-.details .g-signin2 {
-    position: absolute;
-    padding: 14px 20px;
-    margin: 8px 0;
-    border: none;
-    width: 100%;
 }
