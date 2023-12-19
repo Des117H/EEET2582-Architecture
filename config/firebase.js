@@ -3,6 +3,11 @@ import {
 
 } from 'firebase/app';
 
+import {
+    getAuth,
+    onAuthStateChanged
+} from 'firebase/auth'
+
 const firebaseConfig = {
     apiKey: "AIzaSyCZ52ZecgR_HY-AJ5oSisUdm2SPhoYEZ40",
     authDomain: "architecture-grandma-bea3b.firebaseapp.com",
@@ -15,3 +20,13 @@ const firebaseConfig = {
   
   // Initialize Firebase
   const app = initializeApp(firebaseConfig);
+  const auth = getAuth(firebaseConfig);
+
+  onAuthStateChanged(auth, user =>{
+    if(user != null) {
+        console.log('logged in!');
+    }
+    else {
+        console.log("No user");
+    }
+  })
