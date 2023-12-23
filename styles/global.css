@@ -1,0 +1,23 @@
+@font-face {
+    font-family: domine;
+    src: url(domine-regular.ttf);
+}
+
+:root {
+    --text: #333;
+    --white: #fff;
+    --primary: #3A4D39;
+    --se_primary: #739072;
+    --theme: #ECE3CE;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    /* font-size: 100%; */
+}
+
+ul {
+    list-style: none;
+}

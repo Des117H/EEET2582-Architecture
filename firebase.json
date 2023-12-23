@@ -1,0 +1,135 @@
+{
+    "hosting": {
+        "public": "src/main",
+        "ignore": [
+            "firebase.json",
+            "**/.*",
+            "**/node_modules/**"
+        ],
+        "redirects": [
+            {
+                "source": "/firebase/**",
+                "destination": "https://www.firebase.com",
+                "type": 302
+            }
+        ],
+        "rewrites": [
+            {
+                "source": "/",
+                "destination": "/resources/templates/index.html"
+            },
+            {
+                "source": "/account",
+                "destination": "/resources/templates/account.html"
+            },
+            {
+                "source": "/edit",
+                "destination": "/resources/templates/edit.html"
+            },
+            {
+                "source": "/homepage",
+                "destination": "/resources/templates/homepage.html"
+            },
+            {
+                "source": "/welcome",
+                "destination": "/resources/templates/welcome.html"
+            },
+            {
+                "source": "/static/logo/name.png",
+                "destination": "/resources/static/logo/name.png"
+            },
+            {
+                "source": "/static/logo/circle.png",
+                "destination": "/resources/static/logo/circle.png"
+            },
+            {
+                "source": "/static/css/account.css",
+                "destination": "/resources/static/css/account.css"
+            },
+            {
+                "source": "/static/css/edit.css",
+                "destination": "/resources/static/css/edit.css"
+            },
+            {
+                "source": "/static/css/error.css",
+                "destination": "/resources/static/css/error.css"
+            },
+            {
+                "source": "/static/css/homepage.css",
+                "destination": "/resources/static/css/homepage.css"
+            },
+            {
+                "source": "/static/css/login.css",
+                "destination": "/resources/static/css/login.css"
+            },
+            {
+                "source": "/static/css/register.css",
+                "destination": "/resources/static/css/register.css"
+            },
+            {
+                "source": "/static/css/style.css",
+                "destination": "/resources/static/css/style.css"
+            },
+            {
+                "source": "/static/css/welcome.css",
+                "destination": "/resources/static/css/welcome.css"
+            },
+            {
+                "source": "/static/js/firebase.js",
+                "destination": "/resources/static/js/firebase.js"
+            },
+            {
+                "source": "/static/js/account.js",
+                "destination": "/resources/static/js/account.js"
+            },
+            {
+                "source": "/static/js/edit.js",
+                "destination": "/resources/static/js/edit.js"
+            },
+            {
+                "source": "/static/js/error.js",
+                "destination": "/resources/static/js/error.js"
+            },
+            {
+                "source": "/static/js/homepage.js",
+                "destination": "/resources/static/js/homepage.js"
+            },
+            {
+                "source": "/static/js/login.js",
+                "destination": "/resources/static/js/login.js"
+            },
+            {
+                "source": "/static/js/register.js",
+                "destination": "/resources/static/js/register.js"
+            },
+            {
+                "source": "/static/js/style.js",
+                "destination": "/resources/static/js/style.js"
+            },
+            {
+                "source": "/static/image/eye-close.png",
+                "destination": "/resources/static/image/eye-close.png"
+            },
+            {
+                "source": "/src/main/resources/static/image/eye-open.png",
+                "destination": "/resources/static/image/eye-close.png"
+            },
+            {
+                "source": "/static/image/eye-open.png",
+                "destination": "/resources/static/image/eye-open.png"
+            },
+            {
+                "source": "/static/image/login-background-1.jpeg",
+                "destination": "/resources/static/image/login-background-1.jpeg"
+            },
+            {
+                "source": "/static/image/login-background-2.jpeg",
+                "destination": "/resources/static/image/login-background-2.jpeg"
+            },
+            {
+                "source": "/static/image/Login.jpg",
+                "destination": "/resources/static/image/Login.jpg"
+            }
+        ]
+    }
+}
