@@ -15,6 +15,7 @@ import { auth } from '../firebase/firebase';
 import styles from '../styles/global.module.css';
 
 
+
 // Configure FirebaseUI
 const REDIRECT_PAGE = "/dashboard";
 
@@ -44,24 +45,16 @@ const Welcome = () => {
           <Container className="description p-2">
             <div className="text-box" >
 
-              <Typography variant='h2' >
+              <h1>
                 Text with love,
                 <br />
-                like your <span>Grandma</span>
-              </Typography>
-
-              <h5>
-                Grandmaly is a Large Language Model AI system with the purpose of
-                fixing languid errors of an English manuscript, such errors
-                including grammatical mistakes, typos, word use, and punctuation.
-                All you have to do is upload a doc or docx file and download the
-                fixed word file!
-                <br />
-                <br />
-                With an account, you will be provided with the option to subscribe
-                and enjoy extended perks of Grandmaly. You will also be given a
-                2-week trial period before deciding to subscribe.
-              </h5>
+                like your <span className={styles.title}> <b>Grandma</b></span>
+              </h1>
+              <p className={styles.description}>
+              <b>Grandmaly is an AI system designed to correct English manuscript errors, including grammar, typos, and punctuation. </b>
+                <br/>
+                <i> Simply upload a doc or docx file, and download the corrected version. Create an account for subscription options, including a 2-week trial.</i>
+              </p>
               <Button 
                 variant="contained"
                 color="primary"
@@ -81,7 +74,7 @@ const Welcome = () => {
             </div>
           </Container>
           <Container className='p-2'>
-            <Image src="Image1.png" alt='Image of grandma' fluid>
+            <Image src="grandma.png" alt='Image of grandma' fluid>
 
             </Image>
           </Container>

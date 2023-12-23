@@ -1,22 +1,3 @@
-.icon {
-    width: 40px;
-    height: 40px;
-}
-
-.headerDiv {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    border-bottom: var(--primary) 3px solid;
-    padding-bottom: 10px;
-    margin: 10px;
-}
-
-.logoDiv {
-    display: flex;
-    align-items: center;
-}
-
 .circleLogo {
     width: 50px;
 }
@@ -24,129 +5,15 @@
 .nameLogo {
     height: 25px;
     margin-left: 10px;
-}
-
-.bodydiv {
-    margin: 10px;
-}
-
-
-.content {
-    max-width: 500px;
-    margin: auto;
-}
-
-/* CSS */
-.button {
-    background-color: var(--white);
-    border: 2px solid var(--primary);
-    border-radius: 8px;
-    box-sizing: border-box;
     color: var(--primary);
-    cursor: pointer;
-    display: inline-block;
-    font-family: nunito, roboto, proxima-nova, "proxima nova", sans-serif;
-    font-size: 16px;
-    font-weight: 600;
-    line-height: 20px;
-    margin: 0;
-    outline: none;
-    padding: 10px 20px;
-    position: relative;
-    text-align: center;
-    text-decoration: none;
-    touch-action: manipulation;
-    transition: box-shadow .2s, -ms-transform .1s, -webkit-transform .1s, transform .1s;
-    user-select: none;
-    -webkit-user-select: none;
-    width: auto;
+
 }
 
-.button:focus-visible {
-    box-shadow: #222222 0 0 0 2px, rgba(255, 255, 255, 0.8) 0 0 0 4px;
-    transition: box-shadow .2s;
+.description{
+    line-height: 2;
+    padding-bottom: 10px;
+    border-bottom: var(--secondary) solid 3px;
 }
-
-.button:hover,
-.button:active {
-    background-color: var(--se_primary);
-    border-color: var(--theme);
-    color: var(--theme);
-}
-
-.button:disabled {
-    border-color: var(--theme);
-    color: #DDDDDD;
-    cursor: not-allowed;
-    opacity: 1;
-}
-
-.se_button {
-    background: var(--se_primary);
-    border: 2px solid var(--primary);
-    border-radius: 6px;
-    box-shadow: rgba(0, 0, 0, 0.1) 1px 2px 4px;
-    box-sizing: border-box;
-    color: #FFFFFF;
-    cursor: pointer;
-    display: inline-block;
-    font-family: nunito, roboto, proxima-nova, "proxima nova", sans-serif;
-    font-size: 16px;
-    font-weight: 600;
-    line-height: 20px;
-    min-height: 40px;
-    outline: 0;
-    padding: 10px 20px;
-    text-align: center;
-    text-rendering: geometricprecision;
-    text-transform: none;
-    user-select: none;
-    -webkit-user-select: none;
-    touch-action: manipulation;
-    vertical-align: middle;
-}
-
-.se_button:hover,
-.se_button:active {
-    background-color: initial;
-    background-position: 0 0;
-    color: var(--primary);
-}
-
-.se_button:active {
-    opacity: .5;
-}
-
-/* Header */
-
-.header-navigation {
-    display: flex;
-    align-items: center;
-    margin-left: auto;
-    /* Push the navigation to the right */
-}
-
-.header-navigation a {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100%;
-    margin-left: 20px;
-    text-decoration: none;
-    color: #333;
-    /* Adjust the color as needed */
-    font-weight: bold;
-    font-size: 16px;
-    transition: color 0.3s;
-    padding: 0px 15px;
-    border-radius: 5px;
-}
-
-.header-navigation a:hover {
-    color: var(--theme);
-    background-color: var(--se_primary);
-}
-
 /* Footer */
 .footer-div {
     background-color: #24262b;
@@ -233,8 +100,9 @@
 
 }
 
-@media (max-wight: 574px) {
-    .footercol {
-        width: 100%;
-    }
+.title{
+    color: var(--primary);
+    font-size: 70px;
+    font-style: oblique;
+    
 }

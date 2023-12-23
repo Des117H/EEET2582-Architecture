@@ -6,8 +6,8 @@
 :root {
     --text: #333;
     --white: #fff;
-    --primary: #3A4D39;
-    --se_primary: #739072;
+    --primary: #ec865a;
+    --secondary: #C3E2C2;
     --theme: #ECE3CE;
 }
 
@@ -16,8 +16,4 @@
     padding: 0;
     border: 0;
     /* font-size: 100%; */
-}
-
-ul {
-    list-style: none;
 }
