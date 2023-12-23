@@ -1,0 +1,87 @@
+.body-div {
+	display: flex;
+	flex-wrap: wrap;
+	/* Wrap the items to the next line if there's not enough space */
+	justify-content: space-between;
+	padding: 20px;
+}
+
+.search-bar {
+	width: 100%;
+	margin-bottom: 20px;
+	border: 1px solid var(--se_primary);
+	padding: 10px;
+}
+
+.doc-container {
+	width: 70%;
+	/* Adjust based on your preference */
+	box-sizing: border-box;
+	/* Include padding and border in the element's total width and height */
+}
+
+.adddoc {
+	margin-bottom: 20px;
+	/* Add some space between the sections */
+}
+
+/* Rest of the CSS remains unchanged */
+#loading-modal .modal-content {
+	background-color: #fff;
+}
+
+.add-doc-form {
+	margin-bottom: 10px;
+}
+
+#file-input {
+	margin-top: 5px;
+}
+
+.add-doc-form label {
+	font-weight: bold;
+	margin-bottom: 5px;
+	display: block;
+}
+
+#file-upload-form {
+	width: 100%;
+}
+
+#file-upload-form button {
+	width: 100%;
+}
+
+.doc-box {
+	display: flex;
+	justify-content: space-between;
+	background-color: #fff;
+	padding: 15px;
+	border: 1px solid #ced4da;
+	border-radius: 5px;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.left-box,
+.right-box {
+	display: flex;
+	align-items: center;
+}
+
+.fa-file,
+.fa-trash-can {
+	margin-right: 10px;
+}
+
+/* Responsive styles for smaller screens */
+@media (max-width: 600px) {
+	.body-div {
+		flex-direction: column;
+	}
+
+	.add-doc,
+	.doc-container {
+		width: 100%;
+		margin-right: 0;
+	}
+}

@@ -1,0 +1,85 @@
+body {
+    background: #f5f5f5;
+    margin-top: 20px;
+}
+
+.ui-w-80 {
+    width: 80px !important;
+    height: auto;
+}
+
+
+.text-light {
+    color: #babbbc !important;
+}
+
+
+.card {
+    background-clip: padding-box;
+    box-shadow: 0 1px 4px rgba(24, 28, 33, 0.012);
+}
+
+.row-bordered {
+    overflow: hidden;
+}
+
+
+.form-row {
+    justify-content: space-evenly;
+    display: flex;
+}
+
+.img-circle img {
+    height: 100px;
+    width: 100px;
+    border-radius: 100%;
+    border: 5px solid white;
+}
+
+#account-plan {}
+
+.premium {
+    margin-left: 10%;
+
+}
+
+.price {
+
+    list-style-type: none;
+    border: 1px solid #eee;
+    width: 264px;
+    padding: 0;
+    -webkit-transition: 0.3s;
+    transition: 0.3s;
+    float: right;
+    margin-right: 10%;
+}
+
+
+.price:hover {
+    box-shadow: 0 8px 12px 0 rgba(0, 0, 0, 0.2)
+}
+
+
+.price .header {
+    background-color: #111;
+    color: white;
+    font-size: 25px;
+}
+
+
+.price li {
+    border-bottom: 1px solid #eee;
+    padding: 20px;
+    text-align: center;
+}
+
+/* Grey list item */
+.price .grey {
+    background-color: #eee;
+    font-size: 20px;
+}
+
+#button-div {
+    margin-top: 25px;
+}

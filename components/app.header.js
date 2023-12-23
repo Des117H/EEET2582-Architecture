@@ -5,7 +5,8 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import { useAuth } from '../firebase/auth';
-import styles from '../styles/global.module.css';
+import Image from 'react-bootstrap/Image';
+import global from '../styles/global.module.css';
 
 function AppHeader() {
 
@@ -14,7 +15,10 @@ function AppHeader() {
   return (
     <Navbar expand="lg" className="bg-body-tertiary justify-content-end">
       <Container>
-        <Navbar.Brand href="#home">Grandmaly</Navbar.Brand>
+        <Container >
+        <Image className={global.circleLogo} src='../logo/circle.png'></Image>
+        <Image className={global.nameLogo} src='../logo/name.png'></Image>
+        </Container>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">

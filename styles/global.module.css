@@ -3,7 +3,7 @@
     height: 40px;
 }
 
-.header-div {
+.headerDiv {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -12,21 +12,21 @@
     margin: 10px;
 }
 
-.logo-div {
+.logoDiv {
     display: flex;
     align-items: center;
 }
 
-.circle-logo {
+.circleLogo {
     width: 50px;
 }
 
-.name-logo {
+.nameLogo {
     height: 25px;
     margin-left: 10px;
 }
 
-.body-div {
+.bodydiv {
     margin: 10px;
 }
 
@@ -234,7 +234,7 @@
 }
 
 @media (max-wight: 574px) {
-    .footer-col {
+    .footercol {
         width: 100%;
     }
 }
