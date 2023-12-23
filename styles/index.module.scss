@@ -1,0 +1,20 @@
+@import "variables.module";
+
+.addButton {
+    stroke: $secondary;
+    stroke-width: 2;
+  }
+  
+  .title {
+    padding: 1em 1em 0;
+  }
+.hr {
+    stroke: $secondary;
+    stroke-width: 5px;
+    stroke-dashoffset: 2px;
+}
+
+.myDialog {
+    width: 90vw;    /* Occupy the 90% of the screen width */
+    max-width: 90vw;
+} 
