@@ -1,0 +1,8 @@
+.container {
+    display: flex;
+}
+
+.toolbar {
+    align-self: center;
+    width: 1200px;
+}
