@@ -24,7 +24,7 @@ function AppHeader() {
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
             <Typography variant='h6' sx={{ flexGrow: 1 }}>{authUser?.email}</Typography>
-            <Button variant="text" color='secondary'>Log Out</Button>
+            <Button variant="text" color='secondary' onClick={signOut}>Log Out</Button>
           </Nav>
         </Navbar.Collapse>
       </Container>
