@@ -44,7 +44,6 @@ const Welcome = () => {
           <div className='p-2'></div>
           <Container className="description p-2">
             <div className="text-box" >
-
               <h1>
                 Text with love,
                 <br />
@@ -61,7 +60,6 @@ const Welcome = () => {
                 style={
                   { float: "right", }
                 }
-                className={styles.button}
                 onClick={() => setLogin(true)}
               >
                 Log In / Sign Up
@@ -75,7 +73,6 @@ const Welcome = () => {
           </Container>
           <Container className='p-2'>
             <Image src="grandma.png" alt='Image of grandma' fluid>
-
             </Image>
           </Container>
         </Stack>

@@ -14,9 +14,9 @@ function AppHeader() {
   const { authUser } = useAuth();
 
   return (
-    <Navbar expand="lg" className=" justify-content-end">
+    <Navbar expand="lg" className="justify-content-end">
       <Container>
-        <Container >
+        <Container className={global.headerContainer}>
         <Image className={global.circleLogo} src='../logo/circle.png'></Image>
         <Image className={global.nameLogo} src='../logo/name.png'></Image>
         </Container>

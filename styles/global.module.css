@@ -1,108 +1,87 @@
+/* Header*/
 .circleLogo {
     width: 50px;
 }
 
 .nameLogo {
     height: 25px;
-    margin-left: 10px;
     color: var(--primary);
-
 }
 
+.headerContainer{
+    border-left: var(--secondary) double 10px;
+}
+
+
+/* Main */
 .description{
     line-height: 2;
     padding-bottom: 10px;
     border-bottom: var(--secondary) solid 3px;
-}
-/* Footer */
-.footer-div {
-    background-color: #24262b;
-    padding: 70px 0;
-    position: fixed;
-    width: 100%;
-    bottom: 0;
+   
 }
 
-.footer-row {
-    display: flex;
-    flex-wrap: wrap;
-}
+.myDialog {
+    width: 90vw;    /* Occupy the 90% of the screen width */
+    max-width: 90vw;
+} 
 
-
-
-.footer-container {
-    max-width: 1170px;
-    margin: auto;
-}
-
-.footer-col {
-    width: 25%;
-    padding: 0 15px;
-}
-
-.footer-col h4 {
-    font-size: 18px;
-    color: #FFFFFF;
-    text-transform: capitalize;
-    margin-bottom: 35px;
-    font-weight: 500;
-    position: relative;
-}
-
-.footer-col h4::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    bottom: -10px;
-    background-color: #e91e63;
-    height: 2px;
-    box-sizing: border-box;
-    width: 50px;
-}
-
-.footer-col ul li:not(:last-child) {
-    margin-bottom: 10px;
-}
-
-.footer-col ul li a {
-    font-size: 16px;
-    text-transform: capitalize;
-    color: white;
-    text-decoration: none;
-    font-weight: 300;
-    color: #bbbbbb;
-    display: block;
-    transition: all 0.3s ease;
-}
-
-.footer-col ul li a:hover {
-    color: #FFFFFF;
-    padding-left: 8px;
-
-}
-
-.footer-col .social-icon a {
-    display: inline-block;
-    height: 40px;
-    width: 40px;
-    background-color: rgba(255, 255, 255, 0.2);
-    margin: 0 10px 10px 0;
-    text-align: center;
-    line-height: 40px;
-    border-radius: 50%;
-    color: #ffffff;
-    transition: all 0.5s ease;
-}
-
-.footer-col .social-icon a:hover {
-    color: #24262b;
-    background-color: #ffffff;
-
-}
 
 .title{
     color: var(--primary);
     font-size: 70px;
     font-style: oblique;
+    text-decoration: underline dashed var(--secondary);
+}
+
+/* Footer */
+
+.footer{
+    border-top: 5px double var(--theme);
+}
+
+.footerTitle{
+    margin-top: 20px;
+    color: var(--secondary);
+    font-weight: bold;
+    font-size: larger;
+    padding-left: 10px;
+    border-left: var(--primary) solid 2px;
+    border-bottom: var(--primary) dashed 2px;
     
+}
+
+.footerMap{
+    display: flex;
+    width: 50%;
+    border: 2px solid var(--primary);
+    padding: 10px;
+    height: auto;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    box-shadow: 2px 2px var(--secondary);
+}
+
+.footerIcon{
+    font-size: 30px;
+    color: var(--primary);
+}
+
+.footerIcon:hover,
+.footerIcon:focus {
+    color: var(--secondary);
+  transform: translateY(-0.25em);
+padding-bottom: 5px;
+  border-bottom: solid 2px var(--primary);
+}
+
+
+
+.footerText{
+    display: flex;
+    justify-content: center;
+    color: #888;
+    margin-bottom: 20px;
+    font-style: italic;
+    font-size: 18px;
 }
