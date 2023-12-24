@@ -21,6 +21,7 @@
    
 }
 
+/* Dialog */
 .myDialog {
     width: 90vw;    /* Occupy the 90% of the screen width */
     max-width: 90vw;
@@ -74,9 +75,6 @@
 padding-bottom: 5px;
   border-bottom: solid 2px var(--primary);
 }
-
-
-
 .footerText{
     display: flex;
     justify-content: center;
