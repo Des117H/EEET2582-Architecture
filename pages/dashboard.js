@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation";
 import { useAuth } from '../firebase/auth';
 import AddIcon from '@mui/icons-material/Add';
 import NavBar from '../components/navbar';
-import ReceiptRow from '../components/receiptRow';
+import DocumentRow from '../components/DocumentRow';
 import ExpenseDialog from '../components/expenseDialog';
 import Head from "next/head";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -139,7 +139,7 @@ export default function dashboard() {
             documents.map((document) => (
                 <div key={document.id}>
                     <Divider light />
-                    <DocumentRow toConfirm={ocrFeatureFlag ? isConfirmedDocuments : false} document={document}
+                    <DocumentRow document={document}
                         onEdit={() => onUpdate(document, actionEnum)}
                         onDelete={() => onClickDelete(document.id, document.imageBucket)} />
                 </div>)

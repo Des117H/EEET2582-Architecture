@@ -40,13 +40,13 @@ export async function getDocumentsOcr(uid, isConfirmed) {
         let allDocuments = [];
         for (const documentSnapshot of snapshot.docs) {
             const document = documentSnapshot.data();
-                allDocuments.push({
-                    ...document,
-                    date: document['date'].toDate(),
-                    id: documentSnapshot.id,
-                    documentUrl: await getDownloadURL(document['documentBucket']),
-                    documentBucket: document['documentBucket'],
-                });
+            allDocuments.push({
+                ...document,
+                date: new Date(document['date']).toDateString(),
+                id: documentSnapshot.id,
+                documentUrl: await getDownloadURL(document['documentBucket']),
+                documentBucket: document['documentBucket'],
+            });
         }
         return allDocuments;
     } else {
@@ -63,9 +63,10 @@ async function processDocuments(documents) {
     let allDocuments = [];
     for (const documentSnapshot of snapshot.docs) {
         const document = documentSnapshot.data();
+        console.log(document);
         allDocuments.push({
             ...document,
-            date: document['date'].toDate(),
+            date: new Date(document['date']).toDateString(),
             id: documentSnapshot.id,
             documentUrl: await getDownloadURL(document['documentBucket']),
             documentBucket: document['documentBucket'],
