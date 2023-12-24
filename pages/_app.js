@@ -13,7 +13,9 @@ export default function App({ Component, pageProps }) {
   return (
     // <LocalizationProvider dateAdapter={AdapterDateFns}>
     <AuthUserProvider>
+        
       <ThemeProvider theme={theme}>
+        
         <Component {...pageProps} />
       </ThemeProvider>
     </AuthUserProvider>
