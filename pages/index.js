@@ -20,19 +20,19 @@ import styles from '../styles/global.module.css';
 const REDIRECT_PAGE = "/dashboard";
 
 const uiConfig = {
-  signInFlow: "popup",
-  signInSuccessUrl: REDIRECT_PAGE,
-  // able to log In with email and google
-  SignInOptions: [
-    EmailAuthProvider.PROVIDER_ID,
-    GoogleAuthProvider.PROVIDER_ID,
-  ],
+	signInFlow: "popup",
+	signInSuccessUrl: REDIRECT_PAGE,
+	// able to log In with email and google
+	SignInOptions: [
+		EmailAuthProvider.PROVIDER_ID,
+		GoogleAuthProvider.PROVIDER_ID,
+	],
 };
 
 const Welcome = () => {
-  const router = useRouter();
-  const { authUser, isLoading } = useAuth();
-  const [login, setLogin] = useState(false);
+	const router = useRouter();
+	const { authUser, isLoading } = useAuth();
+	const [login, setLogin] = useState(false);
 
   return (
     <div>

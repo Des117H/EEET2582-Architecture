@@ -1,0 +1,8 @@
+.addButton {
+    stroke: var(--primary);
+    stroke-width: 2;
+}
+
+.title {
+    padding: 1em 1em 0;
+}

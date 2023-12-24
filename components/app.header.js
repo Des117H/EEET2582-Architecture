@@ -11,7 +11,7 @@ import global from '../styles/global.module.css';
 
 function AppHeader() {
 
-  const { authUser } = useAuth();
+	const { authUser, signOut } = useAuth();
 
   return (
     <Navbar expand="lg" className="justify-content-end">
