@@ -1,5 +1,3 @@
-"use client";
-
 import AppHeader from "../components/app.header";
 import AppFooter from "../components/app.footer";
 import { Stack, Modal, Image } from "react-bootstrap";
@@ -16,51 +14,10 @@ import {
   Dialog,
   Typography,
 } from "@mui/material";
-import { useAuth } from "../firebase/auth";
-import { auth } from "../firebase/firebase";
 import styles from "../styles/global.module.css";
 
-// Configure FirebaseUI
-const REDIRECT_PAGE = "/dashboard";
-
-const uiConfig = {
-  signInFlow: "popup",
-  signInSuccessUrl: REDIRECT_PAGE,
-  // able to log In with email and google
-  SignInOptions: [
-    EmailAuthProvider.PROVIDER_ID,
-    GoogleAuthProvider.PROVIDER_ID,
-  ],
-};
-
-function LoginModal(props) {
-  return (
-    <Modal
-      {...props}
-      size="md"
-      aria-labelledby="contained-modal-title-vcenter"
-      centered
-    >
-      <Modal.Header>
-        <Modal.Title id="contained-modal-title-vcenter">
-          Welcome Back Child !
-        </Modal.Title>
-      </Modal.Header>
-      <Modal.Body>
-        <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={auth} />
-      </Modal.Body>
-      <Modal.Footer>
-        <Button variant="contained" color="secondary" onClick={props.onHide}>Close</Button>
-      </Modal.Footer>
-    </Modal>
-  );
-}
-
-
-const Welcome = () => {
+const EditDocument = () => {
   const router = useRouter();
-  const { authUser, isLoading } = useAuth();
-  const [login, setLogin] = useState(false);
 
   return (
     <div>
@@ -93,14 +50,6 @@ const Welcome = () => {
                   a 2-week trial.
                 </i>
               </p>
-              <Button variant="contained" color="primary" style={{float: "right"}} onClick={() => setLogin(true)}>
-                Log in here !
-              </Button>
-
-              <LoginModal
-                show={login}
-                onHide={() => setLogin(false)}
-              />
             </div>
           </Container>
           <Container className="p-2">
@@ -108,11 +57,8 @@ const Welcome = () => {
           </Container>
         </Stack>
       </main>
-      <footer>
-        <AppFooter />
-      </footer>
     </div>
   );
 };
 
-export default Welcome;
+export default EditDocument;

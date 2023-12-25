@@ -5,7 +5,7 @@ import { useAuth } from '../firebase/auth';
 import AddIcon from '@mui/icons-material/Add';
 import NavBar from '../components/navbar';
 import DocumentRow from '../components/DocumentRow';
-import ExpenseDialog from '../components/expenseDialog';
+import ExpenseDialog from '../components/documentDialog';
 import Head from "next/head";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { deleteDocument as deleteFromDb, getDocumentsMvp, getDocumentsOcr } from '../firebase/firestore';

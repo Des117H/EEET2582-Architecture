@@ -40,6 +40,7 @@ export async function getDocumentsOcr(uid, isConfirmed) {
         let allDocuments = [];
         for (const documentSnapshot of snapshot.docs) {
             const document = documentSnapshot.data();
+            console.log(document);
             allDocuments.push({
                 ...document,
                 date: new Date(document['date']).toDateString(),
@@ -63,7 +64,6 @@ async function processDocuments(documents) {
     let allDocuments = [];
     for (const documentSnapshot of snapshot.docs) {
         const document = documentSnapshot.data();
-        console.log(document);
         allDocuments.push({
             ...document,
             date: new Date(document['date']).toDateString(),

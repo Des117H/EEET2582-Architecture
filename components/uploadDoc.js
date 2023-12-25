@@ -62,6 +62,7 @@ export default function uploadDialog(props) {
 
     // Set the relevant fields for receipt document
     const setFileData = (target) => {
+        
         const file = target.files[0];
         documentName = file.name;
         setFormFields(prevState => ({ ...prevState, fileName: file.name }));

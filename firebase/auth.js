@@ -1,10 +1,12 @@
 import { onAuthStateChanged, signOut as authSignOut } from 'firebase/auth';
 import { createContext, useContext, useEffect, useState } from 'react'
 import { auth } from './firebase'
+import { useRouter } from "next/router";
 
 export default function useFirebaseAuth() {
 	const [authUser, setAuthUser] = useState(null);
 	const [isLoading, setIsLoading] = useState(true);
+	const router = useRouter();
 
 	const clear = () => {
 		setAuthUser(null);
@@ -24,7 +26,10 @@ export default function useFirebaseAuth() {
 		setIsLoading(false);
 	}
 
-	const signOut = () => authSignOut(auth).then(clear);
+	const signOut = () => {
+		authSignOut(auth).then(clear);
+		router.push('/');
+	};
 	
 
 	useEffect(() => {
