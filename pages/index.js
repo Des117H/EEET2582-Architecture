@@ -67,7 +67,7 @@ const Welcome = () => {
       <header>
         <AppHeader />
       </header>
-      <main>
+      <main className={styles.mainBody}>
         <Stack direction="horizontal" gap={10}>
           <div className="p-2"></div>
           <Container className="description p-2">

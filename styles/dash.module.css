@@ -1,0 +1,13 @@
+/* Dialog */
+
+.addDocument{
+    border-bottom: double 5px var(--primary);
+    line-height: 2;
+    font-weight: bold;
+
+}
+
+.mainBody{
+    padding-top: 10px;
+    border-top: dashed var(--theme) 5px;
+}
