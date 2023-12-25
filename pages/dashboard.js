@@ -193,7 +193,7 @@ export default function dashboard() {
         <AppHeader />
       </div>
       <main className={global.mainBody}  >
-        <Container>
+        <Container className={dash.mainBody}>
           <Snackbar
             open={showSuccessSnackbar}
             autoHideDuration={1500}

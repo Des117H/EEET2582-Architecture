@@ -7,3 +7,7 @@
 
 }
 
+.mainBody{
+    padding-top: 10px;
+    border-top: dashed var(--theme) 5px;
+}
