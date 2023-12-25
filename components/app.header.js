@@ -6,36 +6,30 @@ import NavDropdown from "react-bootstrap/NavDropdown";
 import { useAuth } from "../firebase/auth";
 import Image from "react-bootstrap/Image";
 import global from "../styles/global.module.css";
+import { useRouter } from "next/router";
 
 function AppHeader() {
-  const { authUser, signOut } = useAuth();
+	const { authUser, signOut } = useAuth();
+	const router = useRouter();
 
-  return authUser ? (
-    <Navbar expand="lg" className="justify-content-end">
-      <Container>
-        <Container className={global.headerContainer}>
-          <Image className={global.circleLogo} src="../logo/circle.png"></Image>
-          <Image className={global.nameLogo} src="../logo/name.png"></Image>
-        </Container>
-        <p className={global.authContainer}>
-          Welcome my child, <span className={global.authName}>{authUser?.email}</span>
-        </p>
-        <Button variant="contained" color="secondary" onClick={signOut}>
-          log Out
-        </Button>
-      </Container>
-    </Navbar>
-  ) : (
-    <Navbar expand="lg" className="justify-content-end">
-      <Container>
-        <Container className={global.headerContainer}>
-          <Image className={global.circleLogo} src="../logo/circle.png"></Image>
-          <Image className={global.nameLogo} src="../logo/name.png"></Image>
-        </Container>
-        <Navbar.Toggle aria-controls="basic-navbar-nav" />
-      </Container>
-    </Navbar>
-  );
+	return (
+		<Navbar expand="lg" className="justify-content-end">
+			<Container>
+				<Container className={global.headerContainer}>
+					<Image className={global.circleLogo} src="../logo/circle.png"></Image>
+					<Image className={global.nameLogo} src="../logo/name.png"></Image>
+				</Container>
+				{(router.pathname == "/dashboard") &&
+					<p className={global.authContainer}>
+						Welcome my child, <span className={global.authName}>{authUser?.email}</span>
+					</p>}
+				{(authUser) &&
+					<Button variant="contained" color="secondary" onClick={signOut}>
+						log Out
+					</Button>}
+			</Container>
+		</Navbar>
+	);
 }
 
 export default AppHeader;
