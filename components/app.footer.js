@@ -1,6 +1,6 @@
 "use client";
 
-import { Container, Row, Col, Ratio, ListGroup, Form } from "react-bootstrap";
+import { Container, Row, Col, Ratio, ListGroup, Form, Table } from "react-bootstrap";
 import { Button } from "@mui/material";
 import global from "../styles/global.module.css";
 import { Facebook, Instagram, Twitter, Youtube } from "react-bootstrap-icons";
@@ -11,8 +11,28 @@ function AppFooter() {
       <Row>
         <Col className="footer-col">
           <p className={global.footerTitle}>About Us</p>
-          <span>Phone number: </span>
-          <a href="tel:02837761300">028 3776 1300</a>
+          
+
+          <ListGroup variant="flush">
+          <Table borderless size="sm">
+      
+      <tbody>
+        <tr>
+          <td className = {global.footerTableTitle}>Website</td>
+          <td ><a className = {global.footerTableContent} target="_blank" href="https://www.rmit.edu.vn/vi">RMITUniversityVietnam</a></td>
+        </tr>
+        <tr>
+          <td className = {global.footerTableTitle}>Phone</td>
+          <td ><a className = {global.footerTableContent} href="tel:02837761300">028 3776 1300</a></td>
+        </tr>
+        <tr>
+          <td className = {global.footerTableTitle}>Address</td>
+          <td ><a className = {global.footerTableContent} target="_blank" href="https://maps.app.goo.gl/bEUudhRzf6xRe5859">702 Đ. Nguyễn Văn Linh, Tân Hưng, Quận 7, Thành phố Hồ Chí Minh 700000</a></td>
+          
+        </tr>
+      </tbody>
+    </Table>
+    </ListGroup>
         </Col>
         <Col className="footer-col">
           <p className={global.footerTitle}>Social Media</p>
@@ -54,7 +74,7 @@ function AppFooter() {
                 <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
               </Col>
               <Col md={4}>
-                <Button variant="contained" color="secondary" type="submit">
+                <Button variant="contained" color="secondary">
                   Submit
                 </Button>
               </Col>

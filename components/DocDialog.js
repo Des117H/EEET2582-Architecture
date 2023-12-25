@@ -7,6 +7,7 @@ import { ocrFeatureFlag } from '../firebase/remoteConfig';
 import { uploadDocument } from '../firebase/storage';
 import { DOCUMENTS_ENUM } from '../pages/dashboard';
 import styles from '../styles/css/expenseDialog.module.css';
+import global from '../styles/global.module.css';
 
 
 const DEFAULT_FILE_NAME = "No file selected";
@@ -24,16 +25,6 @@ const ADD_DOCUMENT_TITLE = "Add Document";
 const EDIT_DOCUMENT_TITLE = "Edit Document";
 const CONFIRM_DOCUMENT_TITLE = "Confirm Document";
 
-/* 
- Dialog to input receipt information
- 
- props:
-  - receipt is the receipt to edit if the dialog is being opened to edit, otherwise {}
-  - action is the action for which this dialog was opened
-  - onError emits to notify error occurred
-  - onSuccess emits to notify successfully saving receipt
-  - onCloseDialog emits to close dialog
- */
 export default function expenseDialog(props) {
 
     const isAdd = props.action === DOCUMENTS_ENUM.add;

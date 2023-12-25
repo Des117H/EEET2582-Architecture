@@ -1,0 +1,9 @@
+/* Dialog */
+
+.addDocument{
+    border-bottom: double 5px var(--primary);
+    line-height: 2;
+    font-weight: bold;
+
+}
+
