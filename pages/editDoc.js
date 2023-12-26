@@ -3,6 +3,15 @@
 import AppHeader from "../components/app.header";
 import AppFooter from "../components/app.footer";
 import { useRouter } from "next/router";
+import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth";
+import { EmailAuthProvider, GoogleAuthProvider } from "firebase/auth";
+import {
+	Button,
+	CircularProgress,
+	Container,
+	Dialog,
+	Typography,
+} from "@mui/material";
 import styles from "../styles/global.module.css";
 import Head from "next/head";
 import documentEdit from "../components/editQuill";
