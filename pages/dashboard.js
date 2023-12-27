@@ -38,6 +38,7 @@ import global from "../styles/global.module.css";
 import dash from "../styles/dash.module.css";
 import AppHeader from "../components/app.header";
 import AppFooter from "../components/app.footer";
+import Link from 'next/link'
 
 const ADD_SUCCESS_MVP = "Document was successfully added!";
 const ADD_SUCCESS_OCR =
@@ -137,6 +138,7 @@ export default function dashboard() {
 
 	const onUpdate = (document, action) => {
 		setUpdateDocument(document);
+		console.log(document);
 		setAction(action);
 	};
 

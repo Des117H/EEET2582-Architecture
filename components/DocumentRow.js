@@ -4,6 +4,8 @@ import EditIcon from '@mui/icons-material/Edit';
 import DescriptionIcon from '@mui/icons-material/Description';
 import { format } from 'date-fns';
 import styles from '../styles/css/documentRow.module.css';
+import Link from 'next/link'
+import { useRouter } from "next/router";
 
 /* 
  Each row with document information
@@ -21,10 +23,20 @@ import styles from '../styles/css/documentRow.module.css';
 export default function DocumentRow(props) {
 	const document = props.document;
 	const documentName = document.documentBucket.split('/').slice(-1)[0];
-	
+	const router = useRouter();
+
 	const documentDate = () => {
 		return format(document.date, "yyyy/MM/dd");
 	}
+	
+	const passDocument = () => {
+		props.onEdit;
+		router.push({
+			pathname: '/editDoc',
+			query: {data: document.documentUrl},
+		});
+	}
+
 	return (
 		<div>
 			<Stack direction="row" justifyContent="space-between" sx={{ margin: "1em 0" }}>
@@ -45,7 +57,7 @@ export default function DocumentRow(props) {
 				</Stack>
 
 				<Stack direction="row" className={styles.actions}>
-					<IconButton aria-label="edit" color="secondary" onClick={props.onEdit}>
+					<IconButton aria-label="edit" color="secondary" onClick={passDocument}>
 						<EditIcon />
 					</IconButton>
 					<IconButton aria-label="delete" color="secondary" onClick={props.onDelete}>

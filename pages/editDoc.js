@@ -1,6 +1,8 @@
 "use client";
 
 import AppFooter from "../components/app.footer";
+import { Stack, Modal, Image } from "react-bootstrap";
+
 import { useRouter } from "next/router";
 import {
 	Button,
@@ -12,44 +14,44 @@ import {
 import styles from "../styles/global.module.css";
 import Head from "next/head";
 
-import { useParams } from 'next/navigation'
-
 
 import dynamic from "next/dynamic";
 import React, { useState, useRef, useEffect } from "react";
 import 'react-quill/dist/quill.snow.css'
-import {getDownloadURL} from '../firebase/storage';
+import { getDownloadURL } from '../firebase/storage';
 
 
 const ReactQuill = dynamic(() => import("react-quill"), {
-  ssr: false
+	ssr: false
 });
 
+
 const EditDocument = () => {
-  const router = useRouter();
-  const params = useParams();
-  console.log(params)
-  const [value, setValue] = useState("");
-  const quillRef = useRef();
+	const router = useRouter();
 
-  useEffect(() => {
-    console.log(quillRef.current);
-  }, [quillRef]);
+	const [value, setValue] = useState("");
+	const quillRef = useRef();
 
-  return (
-   
-    <div>
-      <Head>
-        <title>Document Edit</title>
-      </Head>
+	useEffect(() => {
+		console.log(quillRef.current);
+	}, [quillRef]);
 
-      <main className={styles.mainBody} style={{ padding: '20px' }} >
-        
-      <ReactQuill ref={quillRef} theme="snow" value={value} onChange={setValue} />
-      </main>
-      <AppFooter/>
-    </div>
-  );
+	const downloadUrl = router.query.data;
+	console.log(downloadUrl);
+
+	return (
+		<div>
+			<Head>
+				<title>Document Edit</title>
+			</Head>
+
+			<main className={styles.mainBody} style={{ padding: '20px' }} >
+
+				<ReactQuill ref={quillRef} theme="snow" value={value} onChange={setValue} />
+			</main>
+			<AppFooter />
+		</div>
+	);
 };
 
 export default EditDocument;

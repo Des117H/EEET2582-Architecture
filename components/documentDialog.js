@@ -76,7 +76,7 @@ export default function documentDialog(props) {
 	const setFileData = (target) => {
 		const file = target.files[0];
 		const documentExtensions = file.name.split('.').slice(-1)[0];
-		
+
 		if (documentExtensions == "doc" || documentExtensions == "docx") {
 			setFormFields(prevState => ({ ...prevState, fileName: file.name }));
 			setFormFields(prevState => ({ ...prevState, file }));
@@ -130,18 +130,13 @@ export default function documentDialog(props) {
 				<Typography variant="h4" className={styles.title}>{dialogTitle}</Typography>
 				<DialogContent className={styles.pickDocument}>
 					{<Stack direction="row" spacing={2} className={styles.receiptDocument}>
-						{/* {!formFields.fileName &&
-                            <Link href={formFields.documentUrl} target="_blank">
-                                <Avatar alt="document" src={formFields.documentUrl} />
-                            </Link>
-                        } */}
 						{(isAdd || (isEdit && !ocrFeatureFlag)) &&
 							<Button variant="outlined" component="label" color="secondary">
 								Upload Document
 								<input type="file" hidden onInput={(event) => { setFileData(event.target) }} />
 							</Button>
 						}
-						<Typography>{documentName}</Typography>
+						<Typography>{documentName.toString()}</Typography>
 					</Stack>
 					}
 					{(isEdit || !ocrFeatureFlag) ?

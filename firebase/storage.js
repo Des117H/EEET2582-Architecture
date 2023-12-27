@@ -7,7 +7,6 @@ const BUCKET_URL = "gs://architecture-grandma-bea3b.appspot.com";
 export async function uploadDocument(document, uid) {
 	// const formatedDate = format(new Date(), "yyyy-MM-dd\\HH:mm:ss");
 	const name = document.name;
-	console.log(document);
 	const bucket = `${BUCKET_URL}/${uid}/${name}`;
 	const storageRef = ref(storage, bucket);
 	await uploadBytes(storageRef, document);
