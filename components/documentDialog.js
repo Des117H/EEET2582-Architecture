@@ -55,7 +55,7 @@ export default function documentDialog(props) {
 	if (isEdit) {
 		console.log("uid: "+uid);
 		console.log("document Name: "+ formFields);
-		// router.push(`/editDoc/${uid}/${documentName}`);
+		router.push(`/editDoc/${uid}`);
 	}
 
 	// If the receipt to edit or whether to close or open the dialog ever changes, reset the form fields

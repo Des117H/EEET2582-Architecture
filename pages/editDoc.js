@@ -18,7 +18,6 @@ import Head from "next/head";
 import dynamic from "next/dynamic";
 import React, { useState, useRef, useEffect } from "react";
 import 'react-quill/dist/quill.snow.css'
-import { getDownloadURL } from '../firebase/storage';
 
 
 const ReactQuill = dynamic(() => import("react-quill"), {
