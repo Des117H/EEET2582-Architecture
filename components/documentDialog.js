@@ -44,14 +44,18 @@ export default function documentDialog(props) {
 	const [isSubmitting, setIsSubmitting] = useState(false);
 
 	let documentName = "";
+	let uid = "";
 
 	if (formFields != undefined)
-		documentName = formFields.fileName;
+		documentName = formFields;
+		uid = authUser.uid;
 
 	// Set dialog title based on action
 	let dialogTitle = ADD_DOCUMENT_TITLE;
 	if (isEdit) {
-		router.push("/editDoc");
+		console.log("uid: "+uid);
+		console.log("document Name: "+ formFields);
+		// router.push(`/editDoc/${uid}/${documentName}`);
 	}
 
 	// If the receipt to edit or whether to close or open the dialog ever changes, reset the form fields

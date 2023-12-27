@@ -12,6 +12,8 @@ import {
 import styles from "../styles/global.module.css";
 import Head from "next/head";
 
+import { useParams } from 'next/navigation'
+
 
 import dynamic from "next/dynamic";
 import React, { useState, useRef, useEffect } from "react";
@@ -23,11 +25,10 @@ const ReactQuill = dynamic(() => import("react-quill"), {
   ssr: false
 });
 
-console.log(getDownloadURL());
-
 const EditDocument = () => {
   const router = useRouter();
-
+  const params = useParams();
+  console.log(params)
   const [value, setValue] = useState("");
   const quillRef = useRef();
 
