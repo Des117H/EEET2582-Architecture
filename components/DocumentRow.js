@@ -28,12 +28,11 @@ export default function DocumentRow(props) {
 	const documentDate = () => {
 		return format(document.date, "yyyy/MM/dd");
 	}
-	
 	const passDocument = () => {
 		props.onEdit;
 		router.push({
 			pathname: '/editDoc',
-			query: {data: document.documentUrl},
+			query: {data: document.documentBucket},
 		});
 	}
 
