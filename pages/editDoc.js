@@ -20,21 +20,15 @@ import "react-quill/dist/quill.snow.css";
 import { getDownloadURL } from "../firebase/storage";
 import { auth } from "../firebase/firebase";
 import mammoth from "mammoth";
-import WebViewer from '@pdftron/webviewer'
 
 const ReactQuill = dynamic(() => import("react-quill"), {
 	ssr: false,
 });
 
-export default EditDocument = () => {
+export default function EditDocument (){
 	const router = useRouter();
 
 	const [docxContent, setDocxContent] = useState("");
-	const quillRef = useRef();
-
-	// useEffect(() => {
-	// 	console.log(quillRef.current);
-	// }, [quillRef]);
 
 	const docName = router.query.data;
 	const uid = auth.uid;
@@ -53,65 +47,28 @@ export default EditDocument = () => {
 			});
 	}, []);
 
-	const viewer = useRef(null);
+  const handleSave = async () => {
+    const htmlContent = docxContent; 
 
-	useEffect(() => {
-		import('@pdftron/webviewer').then(() => {
-			WebViewer(
-				{
-					path: '/webviewer/lib',
-					initialDoc: '../public/demo-annotated.pdf',
-					licenseKey: 'demo:1703695491128:7c802e3e03000000000c606c4d96767204dd2d1ace102c39222b9bda27'  // sign up to get a free trial key at https://dev.apryse.com
-				},
-				viewer.current
-			).then((instance) => {
-				const { docViewer } = instance;
-				// you can now call WebViewer APIs here...
-			});
-		});
-	}, []);
+   
+      try {
+        const response = await fetch('/api/convert-to-docx', {
+          method: 'POST',
+          body: JSON.stringify({ htmlContent }),
+        });
 
-	// const handleSave = async () => {
-	// 	try {
-	// 		const docxContent = await htmlToDocx(editorContent);
-	// 		const blob = new Blob([docxContent], { type: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' });
-
-	// 		console.log(docxContent);
-
-	// 		const fileBuffer = await HTMLtoDOCX(docxContent, null, {
-	// 			table: { row: { cantSplit: true } },
-	// 			footer: true,
-	// 			pageNumber: true,
-	// 		});
-
-	// 		const { value } = await mammoth.extractRawText({ arrayBuffer: Buffer.from(docxContent) });
-
-	// 		console.log("this is value");
-
-	// 		console.log(value);
-
-	// 		// const storageRef = ref(storage, 'path_to_your_file.docx');
-	// 		// await uploadBytes(storageRef, blob);
-	// 	} catch (error) {
-	// 		console.error("Error converting or saving the document:", error);
-	// 	}
-	// };
-
-	const handleSave = async () => {
-		const fileBuffer = await HTMLtoDOCX(htmlString, null, {
-			table: { row: { cantSplit: true } },
-			footer: true,
-			pageNumber: true,
-		});
-
-		fs.writeFile(filePath, fileBuffer, (error) => {
-			if (error) {
-				console.log('Docx file creation failed');
-				return;
-			}
-			console.log('Docx file created successfully');
-		});
-	}
+        if (response.ok) {
+          const docxBlob = await response.blob();
+          const url = window.URL.createObjectURL(docxBlob);
+          window.open(url, '_blank');
+        } else {
+          // Handle error
+        }
+      } catch (error) {
+        console.error("Error converting or rendering DOCX:", error);
+        // Handle error
+      }
+  };
 
 	return (
 		<div>
@@ -120,12 +77,9 @@ export default EditDocument = () => {
 			</Head>
 
 			<main className={styles.mainBody} style={{ padding: "20px" }}>
-				<div className='MyComponent'>
-					<div className='webviewer' ref={viewer} style={{ height: '100vh' }}></div>
-				</div>
 				<Button onClick={handleSave}>Save here</Button>
 				<ReactQuill
-					ref={quillRef}
+					// ref={quillRef}
 					theme="snow"
 					value={docxContent}
 					onChange={setDocxContent}
@@ -136,5 +90,5 @@ export default EditDocument = () => {
 	);
 };
 
-// export default EditDocument;
+// EditDocument;
 
