@@ -4,7 +4,6 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useAuth } from '../firebase/auth';
 import AddIcon from '@mui/icons-material/Add';
-import NavBar from '../components/navbar';
 import DocumentRow from '../components/DocumentRow';
 import DocumentDialog from '../components/documentDialog';
 import Head from "next/head";
@@ -16,12 +15,9 @@ import {
 } from "../firebase/firestore";
 import { deleteDocumentBucket } from '../firebase/storage';
 import {
-	AppBar,
-	Box,
 	Button,
 	Container,
 	Stack,
-	Toolbar,
 	Typography,
 	CircularProgress,
 	Dialog,
@@ -32,17 +28,16 @@ import {
 	IconButton,
 	Snackbar,
 } from "@mui/material";
+
 import { ocrFeatureFlag } from "../firebase/remoteConfig";
 import styles from "../styles/css/dashboard.module.css";
 import global from "../styles/global.module.css";
 import dash from "../styles/dash.module.css";
 import AppHeader from "../components/app.header";
 import AppFooter from "../components/app.footer";
-import Link from 'next/link'
 
 const ADD_SUCCESS_MVP = "Document was successfully added!";
-const ADD_SUCCESS_OCR =
-	"Document was successfully added, check back later to confirm document info!";
+const ADD_SUCCESS_OCR = "Document was successfully added, check back later to confirm document info!";
 const ADD_ERROR = "Document was not successfully added!";
 const EDIT_SUCCESS = "Document was successfully updated!";
 const EDIT_ERROR = "Document was not successfully updated!";

@@ -25,21 +25,32 @@ const ReactQuill = dynamic(() => import("react-quill"), {
 	ssr: false,
 });
 
-export default function EditDocument (){
+export default function EditDocument() {
 	const router = useRouter();
 
 	const [docxContent, setDocxContent] = useState("");
 
 	const docName = router.query.data;
 	const uid = auth.uid;
+
+	// , {
+	// 	cache: 'force-cache',
+	// 	next: {
+	// 		tags: ['document'],
+	// 		revalidate: 365 * 3600
+	// 	}
+	// }
+
 	useEffect(() => {
 		getDownloadURL(docName)
 			.then(async (url) => {
 				// Fetch the content or convert the .docx to a readable format (e.g., HTML)
 				const response = await fetch(url);
+
+				const data = await res.json()
 				const docxBuffer = await response.arrayBuffer();
 				const result = await mammoth.convertToHtml({ arrayBuffer: docxBuffer });
-
+ 
 				setDocxContent(result.value);
 			})
 			.catch((error) => {
@@ -47,28 +58,28 @@ export default function EditDocument (){
 			});
 	}, []);
 
-  const handleSave = async () => {
-    const htmlContent = docxContent; 
+	const handleSave = async () => {
+		const htmlContent = docxContent;
 
-   
-      try {
-        const response = await fetch('/api/convert-to-docx', {
-          method: 'POST',
-          body: JSON.stringify({ htmlContent }),
-        });
 
-        if (response.ok) {
-          const docxBlob = await response.blob();
-          const url = window.URL.createObjectURL(docxBlob);
-          window.open(url, '_blank');
-        } else {
-          // Handle error
-        }
-      } catch (error) {
-        console.error("Error converting or rendering DOCX:", error);
-        // Handle error
-      }
-  };
+		try {
+			const response = await fetch('/api/convert-to-docx', {
+				method: 'POST',
+				body: JSON.stringify({ htmlContent }),
+			});
+
+			if (response.ok) {
+				const docxBlob = await response.blob();
+				const url = window.URL.createObjectURL(docxBlob);
+				window.open(url, '_blank');
+			} else {
+				// Handle error
+			}
+		} catch (error) {
+			console.error("Error converting or rendering DOCX:", error);
+			// Handle error
+		}
+	};
 
 	return (
 		<div>

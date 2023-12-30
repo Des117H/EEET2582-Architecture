@@ -1,9 +1,11 @@
+'use server'
+
 import { functions } from "./firebase";
 import { httpsCallable } from "firebase/functions";
-// import HTMLtoDOCX from '../dist/html-to-docx.esm';
+import { revalidateTag } from 'next/cache'
 
 export const processDocument = httpsCallable(functions, 'processDocument');
 
-export const html2Document = () => {
-
+export default async function action() {
+    revalidateTag('document');
 }
