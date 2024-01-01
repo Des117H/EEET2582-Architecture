@@ -39,8 +39,9 @@ export default function EditDocument (){
 				const response = await fetch(url);
 				const docxBuffer = await response.arrayBuffer();
 				const result = await mammoth.convertToHtml({ arrayBuffer: docxBuffer });
+				const htmlWithoutImages = result.value.replace(/<img[^>]*>/g, '');
 
-				setDocxContent(result.value);
+				setDocxContent(htmlWithoutImages);
 			})
 			.catch((error) => {
 				console.error("Error fetching the .docx file:", error);
@@ -48,19 +49,18 @@ export default function EditDocument (){
 	}, []);
 
   const handleSave = async () => {
-    const htmlContent = docxContent; 
-
-   
       try {
         const response = await fetch('/api/convert-to-docx', {
           method: 'POST',
-          body: JSON.stringify({ htmlContent }),
+          body: JSON.stringify(docxContent),
         });
 
         if (response.ok) {
           const docxBlob = await response.blob();
-          const url = window.URL.createObjectURL(docxBlob);
-          window.open(url, '_blank');
+		  console.log("this is docxBlob:" );
+		  console.log(docxBlob);
+        //   const url = window.URL.createObjectURL(docxBlob);
+        //   window.open(url, '_blank');
         } else {
           // Handle error
         }
