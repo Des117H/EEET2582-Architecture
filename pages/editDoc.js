@@ -17,17 +17,18 @@ import "react-quill/dist/quill.snow.css";
 import { getDownloadURL } from "../firebase/storage";
 import { auth } from "../firebase/firebase";
 import mammoth from "mammoth";
-import {replaceDocument} from '../firebase/storage';
+import { replaceDocument } from '../firebase/storage';
 import { doc } from "firebase/firestore";
 
 const ReactQuill = dynamic(() => import("react-quill"), {
 	ssr: false,
 });
 
-export default function EditDocument (){
+export default function EditDocument() {
 	const router = useRouter();
 
 	const [docxContent, setDocxContent] = useState("");
+	const [isLoading, setIsLoading] = useState(true);
 
 	const bucket = router.query.data;
 	const uid = auth.uid;
@@ -47,48 +48,51 @@ export default function EditDocument (){
 			});
 	}, []);
 
-  const handleSave = async () => {
-	console.log(docxContent);
-      try {
-        const response = await fetch('/api/convert-to-docx', {
-          method: 'POST',
-          body: JSON.stringify(docxContent),
-        });
+	const handleSave = async () => {
+		console.log(docxContent);
+		try {
+			const response = await fetch('/api/convert-to-docx', {
+				method: 'POST',
+				body: JSON.stringify(docxContent),
+			});
 
-        if (response.ok) {
-          const docxBlob = await response.blob();
-		  replaceDocument(docxBlob, bucket);
-		  console.log("worked");
+			if (response.ok) {
+				const docxBlob = await response.blob();
+				replaceDocument(docxBlob, bucket);
+				console.log("worked");
 
-		
-        //   const url = window.URL.createObjectURL(docxBlob);
-        //   window.open(url, '_blank');
-        }
-      } catch (error) {
-        console.error("Error converting or rendering DOCX:", error);
-        // Handle error
-      }
-  };
-  const Download = async () => {
-	console.log(docxContent);
-      try {
-        const response = await fetch('/api/convert-to-docx', {
-          method: 'POST',
-          body: JSON.stringify(docxContent),
-        });
 
-        if (response.ok) {
-          const docxBlob = await response.blob();
-          const url = window.URL.createObjectURL(docxBlob);
-          window.open(url, '_blank');
-        }
-      } catch (error) {
-        console.error("Error converting or rendering DOCX:", error);
-        // Handle error
-      }
-  };
+				//   const url = window.URL.createObjectURL(docxBlob);
+				//   window.open(url, '_blank');
+			}
+		} catch (error) {
+			console.error("Error converting or rendering DOCX:", error);
+			// Handle error
+		}
+	};
+	const Download = async () => {
+		console.log(docxContent);
+		try {
+			const response = await fetch('/api/convert-to-docx', {
+				method: 'POST',
+				body: JSON.stringify(docxContent),
+			});
 
-	return (
+			if (response.ok) {
+				const docxBlob = await response.blob();
+				const url = window.URL.createObjectURL(docxBlob);
+				window.open(url, '_blank');
+			}
+		} catch (error) {
+			console.error("Error converting or rendering DOCX:", error);
+			// Handle error
+		}
+	};
+
+	return ((isLoading) ? <CircularProgress
+		color="inherit"
+		sx={{ marginLeft: "50%", marginTop: "25%" }}
+	/> :
 		<div>
 			<Head>
 				<title>Document Edit</title>
@@ -97,21 +101,21 @@ export default function EditDocument (){
 			<main className={styles.mainBody} style={{ padding: "20px" }}>
 				<div >
 					<Button variant="contained" className="primary" onClick={handleSave}>
-					
+
 						Save here</Button>
 					<Button variant="contained" color="secondary" onClick={Download}>Download</Button>
 				</div>
 				<div>
-				<ReactQuill
-					// ref={quillRef}
-					theme="snow"
-					value={docxContent}
-					onChange={setDocxContent}
-				/>
-				<form method="get" action="https://trusting-inherently-feline.ngrok-free.app/generate_code">
-				<textarea placeholder="example here"> </textarea>
-				<button variant="primary" color="primary" type="submit">Submit</button>
-				</form>
+					<ReactQuill
+						// ref={quillRef}
+						theme="snow"
+						value={docxContent}
+						onChange={setDocxContent}
+					/>
+					<form method="get" action="https://trusting-inherently-feline.ngrok-free.app/generate_code">
+						<textarea placeholder="example here"> </textarea>
+						<button variant="primary" color="primary" type="submit">Submit</button>
+					</form>
 				</div>
 
 			</main>
