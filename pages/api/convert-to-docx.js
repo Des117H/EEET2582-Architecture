@@ -4,12 +4,10 @@ import {replaceDocument} from '../../firebase/storage';
 export default async function handler(req, res) {
   if (req.method === 'POST') {
     try {
-      // console.log("this is from api: ")
-      // console.log(req.body);
-      const docxBuffer = await HTMLtoDOCX(req.body, { filename: 'my-document.docx' });
-
-      // console.log("this is from api: ")
-      // console.log(docxBuffer);
+      console.log("this is from api: ")
+      const htmlContentWithoutQuotes = req.body.slice(1, -1);
+      console.log(htmlContentWithoutQuotes);
+      const docxBuffer = await HTMLtoDOCX(htmlContentWithoutQuotes, { filename: 'my-document.docx' });
 
       res.setHeader('Content-Type', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document');
       res.setHeader('Content-Disposition', 'attachment; filename="my-document.docx"');
