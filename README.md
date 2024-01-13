@@ -1,0 +1,1 @@
+ team members, description of the system, URL of the online deployment, basic instructions on how to run the system including login info if needed, description of the system including all features implemented, design of the system including what components and technologies. 
