@@ -68,7 +68,10 @@ const Welcome = () => {
 		router.push("/dashboard");
 	}
 
-	return (
+	return ((authUser) ? <CircularProgress
+		color="inherit"
+		sx={{ marginLeft: "50%", marginTop: "25%" }}
+	/> :
 		<div>
 			<header>
 				<AppHeader />

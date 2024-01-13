@@ -46,45 +46,46 @@ export default function EditDocument() {
       });
   }, []);
 
-  const handleSave = async () => {
-    console.log(docxContent);
-    try {
-      const response = await fetch("/api/convert-to-docx", {
-        method: "POST",
-        body: JSON.stringify(docxContent),
-      });
+	const handleSave = async () => {
+		console.log(docxContent);
+		try {
+			const response = await fetch('/api/convert-to-docx', {
+				method: 'POST',
+				body: JSON.stringify(docxContent),
+			});
 
-      if (response.ok) {
-        const docxBlob = await response.blob();
-        replaceDocument(docxBlob, bucket);
-        console.log("worked");
+			if (response.ok) {
+				const docxBlob = await response.blob();
+				replaceDocument(docxBlob, bucket);
+				console.log("worked");
 
-        //   const url = window.URL.createObjectURL(docxBlob);
-        //   window.open(url, '_blank');
-      }
-    } catch (error) {
-      console.error("Error converting or rendering DOCX:", error);
-      // Handle error
-    }
-  };
-  const handleDownload = async () => {
-    console.log(docxContent);
-    try {
-      const response = await fetch("/api/convert-to-docx", {
-        method: "POST",
-        body: JSON.stringify(docxContent),
-      });
 
-      if (response.ok) {
-        const docxBlob = await response.blob();
-        const url = window.URL.createObjectURL(docxBlob);
-        window.open(url, "_blank");
-      }
-    } catch (error) {
-      console.error("Error converting or rendering DOCX:", error);
-      // Handle error
-    }
-  };
+				//   const url = window.URL.createObjectURL(docxBlob);
+				//   window.open(url, '_blank');
+			}
+		} catch (error) {
+			console.error("Error converting or rendering DOCX:", error);
+			// Handle error
+		}
+	};
+	const Download = async () => {
+		console.log(docxContent);
+		try {
+			const response = await fetch('/api/convert-to-docx', {
+				method: 'POST',
+				body: JSON.stringify(docxContent),
+			});
+
+			if (response.ok) {
+				const docxBlob = await response.blob();
+				const url = window.URL.createObjectURL(docxBlob);
+				window.open(url, '_blank');
+			}
+		} catch (error) {
+			console.error("Error converting or rendering DOCX:", error);
+			// Handle error
+		}
+	};
 
   const handleSubmit = async (inputText) => {
     // Make API request with the inputText

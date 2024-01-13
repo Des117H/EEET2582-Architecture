@@ -4,7 +4,6 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useAuth } from '../firebase/auth';
 import AddIcon from '@mui/icons-material/Add';
-import NavBar from '../components/navbar';
 import DocumentRow from '../components/DocumentRow';
 import DocumentDialog from '../components/documentDialog';
 import Head from "next/head";
