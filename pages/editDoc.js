@@ -49,7 +49,7 @@ export default function EditDocument() {
 	const handleSave = async () => {
 		console.log(docxContent);
 		try {
-			const response = await fetch('/api/convert-to-docx', {
+			const response = await fetch('../components/api/convert-to-docx', {
 				method: 'POST',
 				body: JSON.stringify(docxContent),
 			});
@@ -68,10 +68,10 @@ export default function EditDocument() {
 			// Handle error
 		}
 	};
-	const Download = async () => {
+	const handleDownload = async () => {
 		console.log(docxContent);
 		try {
-			const response = await fetch('/api/convert-to-docx', {
+			const response = await fetch('../components/api/convert-to-docx', {
 				method: 'POST',
 				body: JSON.stringify(docxContent),
 			});

@@ -8,7 +8,7 @@ import { useEffect, useState } from "react";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth";
-import { EmailAuthProvider, GoogleAuthProvider } from "firebase/auth";
+import { EmailAuthProvider, GoogleAuthProvider, GithubAuthProvider } from "firebase/auth";
 import {
 	Button,
 	CircularProgress,
@@ -30,6 +30,7 @@ const uiConfig = {
 	SignInOptions: [
 		EmailAuthProvider.PROVIDER_ID,
 		GoogleAuthProvider.PROVIDER_ID,
+		GithubAuthProvider.PROVIDER_ID
 	],
 };
 

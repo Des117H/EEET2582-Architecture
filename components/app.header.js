@@ -12,6 +12,11 @@ function AppHeader() {
 	const { authUser, signOut } = useAuth();
 	const router = useRouter();
 
+	// Delete document image from Storage
+	const onAccount = async () => {
+		router.push("/account")
+	};
+
 	return (
 		<Navbar expand="lg" className="justify-content-end">
 			<Container>
@@ -21,12 +26,15 @@ function AppHeader() {
 				</Container>
 				{(router.pathname == "/dashboard") &&
 					<p className={global.authContainer}>
-						Welcome my child, <span className={global.authName}>{authUser?.email}</span>
+						Welcome my child, <button className={global.authName} onClick={onAccount}>{authUser?.email}</button>
 					</p>}
 				{(authUser) &&
+				<div>
 					<Button variant="contained" color="secondary" onClick={signOut}>
 						log Out
-					</Button>}
+					</Button> 
+				</div>
+				}
 			</Container>
 		</Navbar>
 	);

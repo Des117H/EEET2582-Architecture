@@ -189,9 +189,11 @@ export default function dashboard() {
 			<Head>
 				<title>Dashboard</title>
 			</Head>
+			
 			<div>
 				<AppHeader />
 			</div>
+
 			<main className={global.mainBody}  >
 				<Container className={dash.mainBody}>
 					<Snackbar
