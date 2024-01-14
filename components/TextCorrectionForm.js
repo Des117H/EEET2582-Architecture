@@ -1,4 +1,6 @@
 import { useState } from 'react';
+import edit from '../styles/edit.module.css'
+import { Button } from "@mui/material";
 
 const TextCorrectionForm = ({ onSubmit }) => {
   const [inputText, setInputText] = useState('');
@@ -11,14 +13,22 @@ const TextCorrectionForm = ({ onSubmit }) => {
 
   return (
     <form onSubmit={handleSubmit} method="get">
-      <label>
-        Manuscript:
-        <textarea
-          value={inputText}
-          onChange={(e) => setInputText(e.target.value)}
-        />
+      <label
+      className= {edit.offCanvasTitle}
+      >
+        Enter paragraph here: 
       </label>
-      <button type="submit">Submit</button>
+      <div>
+      <textarea
+          className= {edit.textArea}
+          value={inputText}
+          onChange={(e) => setInputText(e.target.value)
+          
+          }
+        />
+      <Button variant="contained" color="primary" type="submit">Submit</Button>
+      </div>
+      
     </form>
   );
 };

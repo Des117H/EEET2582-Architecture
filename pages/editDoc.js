@@ -1,13 +1,15 @@
 "use client";
 
 import AppFooter from "../components/app.footer";
-import { Stack, Modal, Image } from "react-bootstrap";
-
 import { useRouter } from "next/router";
-import { Button, Form } from "@mui/material";
+import { Button } from "@mui/material";
+import Offcanvas from 'react-bootstrap/Offcanvas';
+
+
+import Image from "react-bootstrap/Image";
+import Container from "react-bootstrap/Container";
 import styles from "../styles/global.module.css";
 import Head from "next/head";
-import { Download } from "react-bootstrap-icons";
 import dynamic from "next/dynamic";
 import React, { useState, useRef, useEffect } from "react";
 import "react-quill/dist/quill.snow.css";
@@ -15,8 +17,10 @@ import { getDownloadURL } from "../firebase/storage";
 import { auth } from "../firebase/firebase";
 import mammoth from "mammoth";
 import { replaceDocument } from "../firebase/storage";
-import { doc } from "firebase/firestore";
 import TextCorrectionForm from "../components/TextCorrectionForm";
+import edit from '../styles/edit.module.css'
+import global from "../styles/global.module.css";
+import { Margin } from "@mui/icons-material";
 
 const ReactQuill = dynamic(() => import("react-quill"), {
   ssr: false,
@@ -28,7 +32,17 @@ export default function EditDocument() {
   const [docxContent, setDocxContent] = useState("");
   const [correctedText, setCorrectedText] = useState("");
 
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const toggleShow = () => setShow((s) => !s);
+  
+
   const bucket = router.query.data;
+  const docName = bucket;
+  const parts = docName.split('/');
+  const documentName = parts[parts.length - 1];
+
   const uid = auth.uid;
   useEffect(() => {
     getDownloadURL(bucket)
@@ -97,7 +111,7 @@ export default function EditDocument() {
     {
       method: "GET",
       headers: new Headers({
-        "Content-Type": "application/json",
+        // "Content-Type": "application/json",n
         "ngrok-skip-browser-warning": "69420",
       }),
     }
@@ -113,38 +127,71 @@ export default function EditDocument() {
     }
   };
 
+  const handleHome = () => {
+
+  }
+
   return (
     <div>
       <Head>
         <title>Document Edit</title>
       </Head>
 
-      <main className={styles.mainBody} style={{ padding: "20px" }}>
-        <div>
-          <Button variant="contained" className="primary" onClick={handleSave}>
-            Save here
-          </Button>
-          <Button variant="contained" color="secondary" onClick={handleDownload}>
-            Download
-          </Button>
-        </div>
-        <div>
-          <ReactQuill
-            // ref={quillRef}
-            theme="snow"
-            value={docxContent}
-            onChange={setDocxContent}
-          />
-        </div>
-        <div>
-          <h1>Text Correction App</h1>
-          <TextCorrectionForm onSubmit={handleSubmit}  />
-          {correctedText && (
+      <main className={styles.mainBody} style={{ padding: "30px" }}>
+        <div style={{margin:"10px"}}>
+          <div className={`fixed-top ${edit.fixedHeader}`}>
             <div>
-              <h2>Corrected:</h2>
-              <p>{correctedText}</p>
+            <Container className={global.headerContainer}>
+                      <Image className={global.circleLogo} src="../logo/circle.png"></Image>
+                      <Image className={global.nameLogo} src="../logo/name.png"></Image>
+                    </Container>
             </div>
-          )}
+            <div className={edit.btnContainer} >
+            <Button variant="contained" color="primary" onClick={handleHome}>
+                Home
+              </Button>
+              <Button variant="contained" className="primary" onClick={handleSave}>
+                Save here
+              </Button>
+              <Button variant="contained" color="secondary" onClick={handleDownload}>
+                Download
+              </Button>
+              <Button variant="contained" color="secondary"  onClick={toggleShow} className="me-2">
+       Text Correction
+      </Button>
+            
+            </div>
+          </div>
+        </div>
+        <div style={{ marginTop: "130px" }}>
+          <div>
+            <h1 className={edit.documentName}>{documentName}</h1>
+          </div>
+          <div>
+            <ReactQuill
+              // ref={quillRef}
+              theme="snow"
+              value={docxContent}
+              onChange={setDocxContent}
+            />
+          </div>
+         
+          <>
+      <Offcanvas show={show} onHide={handleClose} scroll={true} backdrop ={false} placement="bottom">
+        <Offcanvas.Body>
+        <div>
+    
+            <TextCorrectionForm onSubmit={handleSubmit}  />
+            {correctedText && (
+              <div>
+                <h2>Corrected:</h2>
+                <p>{correctedText}</p>
+              </div>
+            )}
+          </div>
+        </Offcanvas.Body>
+      </Offcanvas>
+    </>
         </div>
       </main>
       <AppFooter />
