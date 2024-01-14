@@ -5,7 +5,6 @@ import { useRouter } from "next/router";
 import { Button } from "@mui/material";
 import Offcanvas from 'react-bootstrap/Offcanvas';
 
-
 import Image from "react-bootstrap/Image";
 import Container from "react-bootstrap/Container";
 import styles from "../styles/global.module.css";
@@ -20,45 +19,49 @@ import { replaceDocument } from "../firebase/storage";
 import TextCorrectionForm from "../components/TextCorrectionForm";
 import edit from '../styles/edit.module.css'
 import global from "../styles/global.module.css";
-import { Margin } from "@mui/icons-material";
+
 
 const ReactQuill = dynamic(() => import("react-quill"), {
-  ssr: false,
+	ssr: false,
 });
 
 export default function EditDocument() {
-  const router = useRouter();
+	const router = useRouter();
 
-  const [docxContent, setDocxContent] = useState("");
-  const [correctedText, setCorrectedText] = useState("");
+	const [docxContent, setDocxContent] = useState("");
+	const [correctedText, setCorrectedText] = useState("");
 
-  const [show, setShow] = useState(false);
+	const [show, setShow] = useState(false);
+	const [isSaved, setIsSaved] = useState(false);
+	const [isSaveClicked, setIsSaveClicked] = useState(false);
+	const [isOpen, setIsOpen] = useState(false);
 
-  const handleClose = () => setShow(false);
-  const toggleShow = () => setShow((s) => !s);
-  
+	const handleClose = () => setShow(false);
+	const toggleShow = () => setShow((s) => !s);
 
-  const bucket = router.query.data;
-  const docName = bucket;
-  const parts = docName.split('/');
-  const documentName = parts[parts.length - 1];
 
-  const uid = auth.uid;
-  useEffect(() => {
-    getDownloadURL(bucket)
-      .then(async (url) => {
-        // Fetch the content or convert the .docx to a readable format (e.g., HTML)
-        const response = await fetch(url);
-        const docxBuffer = await response.arrayBuffer();
-        const result = await mammoth.convertToHtml({ arrayBuffer: docxBuffer });
-        const htmlWithoutImages = result.value.replace(/<img[^>]*>/g, "");
+	const bucket = router.query.data;
+	const docName = bucket;
+	const parts = docName.split('/');
+	const documentName = parts[parts.length - 1];
 
-        setDocxContent(htmlWithoutImages);
-      })
-      .catch((error) => {
-        console.error("Error fetching the .docx file:", error);
-      });
-  }, []);
+	const uid = auth.uid;
+	useEffect(() => {
+		getDownloadURL(bucket)
+			.then(async (url) => {
+				// Fetch the content or convert the .docx to a readable format (e.g., HTML)
+				const response = await fetch(url);
+				const docxBuffer = await response.arrayBuffer();
+				const result = await mammoth.convertToHtml({ arrayBuffer: docxBuffer });
+				const htmlWithoutImages = result.value.replace(/<img[^>]*>/g, "");
+
+				setDocxContent(htmlWithoutImages);
+				setIsSaved(false);
+			})
+			.catch((error) => {
+				console.error("Error fetching the .docx file:", error);
+			});
+	}, []);
 
 	const handleSave = async () => {
 		console.log(docxContent);
@@ -72,7 +75,7 @@ export default function EditDocument() {
 				const docxBlob = await response.blob();
 				replaceDocument(docxBlob, bucket);
 				console.log("worked");
-
+				setIsSaved(false);
 
 				//   const url = window.URL.createObjectURL(docxBlob);
 				//   window.open(url, '_blank');
@@ -82,6 +85,7 @@ export default function EditDocument() {
 			// Handle error
 		}
 	};
+
 	const handleDownload = async () => {
 		console.log(docxContent);
 		try {
@@ -101,102 +105,126 @@ export default function EditDocument() {
 		}
 	};
 
-  const handleSubmit = async (inputText) => {
-    // Make API request with the inputText
-    inputText = "Correct english of this text:" + inputText +". Here is the corrected version";
-    const response = await fetch(
-      `https://polite-horribly-cub.ngrok-free.app/generate_code?prompts=Correct%20English:${encodeURIComponent(
-        inputText
-      )}`,
-    {
-      method: "GET",
-      headers: new Headers({
-        // "Content-Type": "application/json",n
-        "ngrok-skip-browser-warning": "69420",
-      }),
-    }
-    );
-    
-    if (response.ok) {
-      const data = await response.json();
-      // Assuming the API response is an array of corrected text
-      setCorrectedText(data);
-    } else {
-      // Handle error
-      console.error("Failed to fetch data");
-    }
-  };
+	const handleSubmit = async (inputText) => {
+		// Make API request with the inputText
+		inputText = "Correct english of this text:" + inputText + ". Here is the corrected version";
+		const response = await fetch(
+			`https://polite-horribly-cub.ngrok-free.app/generate_code?prompts=Correct%20English:${encodeURIComponent(
+				inputText
+			)}`,
+			{
+				method: "GET",
+				headers: new Headers({
+					// "Content-Type": "application/json",n
+					"ngrok-skip-browser-warning": "69420",
+				}),
+			}
+		);
 
-  const handleHome = () => {
+		if (response.ok) {
+			const data = await response.json();
+			// Assuming the API response is an array of corrected text
+			setCorrectedText(data);
+		} else {
+			// Handle error
+			console.error("Failed to fetch data");
+		}
+	};
 
-  }
+	const handleHome = async () => {
+		if (isSaved) {
+			router.push("/dashboard");
+		} else {
+			setIsOpen(true);
+		}
+	}
 
-  return (
-    <div>
-      <Head>
-        <title>Document Edit</title>
-      </Head>
+	const handleSaveAndLeave = async () => {
+		handleSave();
+		router.push("/dashboard");
+	};
 
-      <main className={styles.mainBody} style={{ padding: "30px" }}>
-        <div style={{margin:"10px"}}>
-          <div className={`fixed-top ${edit.fixedHeader}`}>
-            <div>
-            <Container className={global.headerContainer}>
-                      <Image className={global.circleLogo} src="../logo/circle.png"></Image>
-                      <Image className={global.nameLogo} src="../logo/name.png"></Image>
-                    </Container>
-            </div>
-            <div className={edit.btnContainer} >
-            <Button variant="contained" color="primary" onClick={handleHome}>
-                Home
-              </Button>
-              <Button variant="contained" className="primary" onClick={handleSave}>
-                Save here
-              </Button>
-              <Button variant="contained" color="secondary" onClick={handleDownload}>
-                Download
-              </Button>
-              <Button variant="contained" color="secondary"  onClick={toggleShow} className="me-2">
-       Text Correction
-      </Button>
-            
-            </div>
-          </div>
-        </div>
-        <div style={{ marginTop: "130px" }}>
-          <div>
-            <h1 className={edit.documentName}>{documentName}</h1>
-          </div>
-          <div>
-            <ReactQuill
-              // ref={quillRef}
-              theme="snow"
-              value={docxContent}
-              onChange={setDocxContent}
-            />
-          </div>
-         
-          <>
-      <Offcanvas show={show} onHide={handleClose} scroll={true} backdrop ={false} placement="bottom">
-        <Offcanvas.Body>
-        <div>
-    
-            <TextCorrectionForm onSubmit={handleSubmit}  />
-            {correctedText && (
-              <div>
-                <h2>Corrected:</h2>
-                <p>{correctedText}</p>
-              </div>
-            )}
-          </div>
-        </Offcanvas.Body>
-      </Offcanvas>
-    </>
-        </div>
-      </main>
-      <AppFooter />
-    </div>
-  );
+	const handleNotSaveAndLeave = async () => {
+		router.push("/dashboard");
+	};
+
+	return isOpen ? (
+		<div>
+			<p>Are you sure you want to leave without save?</p>
+			<Button color="secondary" onClick={() => setIsOpen(false)}>
+				Close
+			</Button>
+			<Button color="primary" onClick={handleSaveAndLeave}>
+				Save and Leave
+			</Button>
+			<Button color="primary" onClick={handleNotSaveAndLeave}>
+				Don't Save and Leave
+			</Button>
+		</div>
+	) : (
+		<div>
+			<Head>
+				<title>Document Edit</title>
+			</Head>
+
+			<main className={styles.mainBody} style={{ padding: "30px" }}>
+				<div style={{ margin: "10px" }}>
+					<div className={`fixed-top ${edit.fixedHeader}`}>
+						<div>
+							<Container className={global.headerContainer}>
+								<Image className={global.circleLogo} src="../logo/circle.png"></Image>
+								<Image className={global.nameLogo} src="../logo/name.png"></Image>
+							</Container>
+						</div>
+						<div className={edit.btnContainer} >
+							<Button variant="contained" color="primary" onClick={handleHome}>
+								Home
+							</Button>
+							<Button variant="contained" className="primary" onClick={handleSave}>
+								Save here
+							</Button>
+							<Button variant="contained" color="secondary" onClick={handleDownload}>
+								Download
+							</Button>
+							<Button variant="contained" color="secondary" onClick={toggleShow} className="me-2">
+								Text Correction
+							</Button>
+
+						</div>
+					</div>
+				</div>
+				<div style={{ marginTop: "130px" }}>
+					<div>
+						<h1 className={edit.documentName}>{documentName}</h1>
+					</div>
+					<div>
+						<ReactQuill
+							// ref={quillRef}
+							theme="snow"
+							value={docxContent}
+							onChange={setDocxContent}
+						/>
+					</div>
+
+					<>
+						<Offcanvas show={show} onHide={handleClose} scroll={true} backdrop={false} placement="bottom">
+							<Offcanvas.Body>
+								<div>
+
+									<TextCorrectionForm onSubmit={handleSubmit} />
+									{correctedText && (
+										<div>
+											<h2>Corrected:</h2>
+											<p>{correctedText}</p>
+										</div>
+									)}
+								</div>
+							</Offcanvas.Body>
+						</Offcanvas>
+					</>
+				</div>
+			</main>
+			<AppFooter />
+		</div>
+	);
 }
-
-// EditDocument;

@@ -8,13 +8,13 @@
     color: var(--primary);
 }
 
-.authContainer{
+.authContainer {
     padding-top: 10px;
     font-size: 18px;
     font-weight: 600;
 }
 
-.authName{
+.authName {
     margin-right: 10px;
     font-size: 20px;
     font-weight: bold;
@@ -24,33 +24,35 @@
     background-color: inherit;
 }
 
-.headerContainer{
+.headerContainer {
     border-left: var(--secondary) double 10px;
 }
 
 
 /* Main */
-.mainBody{
+.mainBody {
     display: flex;
-  flex-direction: column;
-  min-height: 100vh; /* Viewport height */
+    flex-direction: column;
+    min-height: 100vh;
+    /* Viewport height */
 }
 
-.description{
+.description {
     line-height: 2;
     padding-bottom: 10px;
     border-bottom: var(--secondary) solid 3px;
-   
+
 }
 
 /* Dialog */
 .myDialog {
-    width: 90vw;    /* Occupy the 90% of the screen width */
+    width: 90vw;
+    /* Occupy the 90% of the screen width */
     max-width: 90vw;
-} 
+}
 
 
-.title{
+.title {
     color: var(--primary);
     font-size: 70px;
     font-style: oblique;
@@ -59,11 +61,11 @@
 
 /* Footer */
 
-.footer{
+.footer {
     border-top: 5px double var(--theme);
 }
 
-.footerTitle{
+.footerTitle {
     margin-top: 20px;
     color: var(--secondary);
     font-weight: bold;
@@ -73,23 +75,23 @@
     border-bottom: var(--primary) dashed 2px;
 }
 
-.footerTableTitle{
+.footerTableTitle {
     font-weight: bold;
     color: var(--primary);
 }
 
-.footerTableContent{
+.footerTableContent {
     text-decoration: none;
     color: var(--dark);
 }
 
-.footerTableContent:hover{
+.footerTableContent:hover {
     color: var(--secondary);
     text-decoration: underline;
-    
+
 }
 
-.footerMap{
+.footerMap {
     display: flex;
     width: 50%;
     border: 2px solid var(--primary);
@@ -100,7 +102,7 @@
     box-shadow: 2px 2px var(--secondary);
 }
 
-.footerIcon{
+.footerIcon {
     font-size: 30px;
     color: var(--primary);
 }
@@ -108,15 +110,51 @@
 .footerIcon:hover,
 .footerIcon:focus {
     color: var(--secondary);
-  transform: translateY(-0.25em);
-padding-bottom: 5px;
-  border-bottom: solid 2px var(--primary);
+    transform: translateY(-0.25em);
+    padding-bottom: 5px;
+    border-bottom: solid 2px var(--primary);
 }
-.footerText{
+
+.footerText {
     display: flex;
     justify-content: center;
     color: #888;
     margin-bottom: 20px;
     font-style: italic;
     font-size: 18px;
+}
+
+.modal-wrapper {
+    width: 500px;
+    height: 600px;
+}
+
+.modal {
+    background: white;
+    height: 100%;
+    width: 100%;
+    border-radius: 15px;
+    padding: 15px;
+}
+
+.modal-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-body {
+    padding-top: 10px;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: flex-end;
+    font-size: 25px;
 }
