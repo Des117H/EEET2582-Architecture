@@ -2,7 +2,10 @@
 
 import AppFooter from "../components/app.footer";
 import { useRouter } from "next/router";
-import { Button } from "@mui/material";
+import {
+	CircularProgress,
+	Button
+} from "@mui/material";
 import Offcanvas from 'react-bootstrap/Offcanvas';
 
 import Image from "react-bootstrap/Image";
@@ -33,12 +36,11 @@ export default function EditDocument() {
 
 	const [show, setShow] = useState(false);
 	const [isSaved, setIsSaved] = useState(false);
-	const [isSaveClicked, setIsSaveClicked] = useState(false);
 	const [isOpen, setIsOpen] = useState(false);
+	const [isLoading, setIsLoading] = useState(true);
 
 	const handleClose = () => setShow(false);
 	const toggleShow = () => setShow((s) => !s);
-
 
 	const bucket = router.query.data;
 	const docName = bucket;
@@ -56,6 +58,7 @@ export default function EditDocument() {
 				const htmlWithoutImages = result.value.replace(/<img[^>]*>/g, "");
 
 				setDocxContent(htmlWithoutImages);
+				setIsLoading(false);
 				setIsSaved(false);
 			})
 			.catch((error) => {
@@ -66,7 +69,7 @@ export default function EditDocument() {
 	const handleSave = async () => {
 		console.log(docxContent);
 		try {
-			const response = await fetch('../components/api/convert-to-docx', {
+			const response = await fetch('api/convert-to-docx', {
 				method: 'POST',
 				body: JSON.stringify(docxContent),
 			});
@@ -98,6 +101,7 @@ export default function EditDocument() {
 				const docxBlob = await response.blob();
 				const url = window.URL.createObjectURL(docxBlob);
 				window.open(url, '_blank');
+				// setIsLoading(false);
 			}
 		} catch (error) {
 			console.error("Error converting or rendering DOCX:", error);
@@ -197,14 +201,23 @@ export default function EditDocument() {
 					<div>
 						<h1 className={edit.documentName}>{documentName}</h1>
 					</div>
-					<div>
-						<ReactQuill
-							// ref={quillRef}
-							theme="snow"
-							value={docxContent}
-							onChange={setDocxContent}
+
+					{(isLoading) &&
+						<CircularProgress
+							color="inherit"
+							sx={{ marginLeft: "50%", marginTop: "25%" }}
 						/>
-					</div>
+					}
+					{(!isLoading) &&
+						<div>
+							<ReactQuill
+								// ref={quillRef}
+								theme="snow"
+								value={docxContent}
+								onChange={setDocxContent}
+							/>
+						</div>
+					}
 
 					<>
 						<Offcanvas show={show} onHide={handleClose} scroll={true} backdrop={false} placement="bottom">

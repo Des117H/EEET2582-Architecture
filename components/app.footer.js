@@ -68,8 +68,7 @@ function AppFooter() {
 							<Col md={8}>
 								<Form.Control
 									type="text"
-									placeholder="Email"
-									defaultValue="example@gmail.com"
+									placeholder="example@gmail.com"
 								/>
 								<Form.Control.Feedback>Looks good!</Form.Control.Feedback>
 							</Col>
