@@ -27,7 +27,7 @@ const TextCorrectionForm = ({ onSubmit }) => {
           value={inputText}
           onChange={(e) => setInputText(e.target.value)}
           placeholder={`Enter your text (max ${maxCharacters} characters)`}
-          maxlength="128"
+          maxLength="128"
         />
       <Button variant="contained" color="primary" type="submit">Submit</Button>
       </div>

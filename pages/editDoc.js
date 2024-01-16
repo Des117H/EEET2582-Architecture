@@ -162,102 +162,43 @@ export default function EditDocument() {
 		}
 	};
 
-
 	const handleSaveAndLeave = async () => {
 		handleSave();
 		router.push("/dashboard");
 	};
 
+	const handleNotSaveAndLeave = async () => {
+		router.push("/dashboard");
+	};
 
-	return isOpen ? (
-		<div>
-		
-			<Button
-				color="secondary"
-				onClick={() => setIsOpen(false)}
-			>
-				Close
-			</Button>
-		
-			<Button color="primary" onClick={handleNotSaveAndLeave}>
-				Don't Save and Leave
-			</Button>
-		</div>
-	) : (
+
+	return (
 		<div>
 			<Head>
 				<title>Document Edit</title>
-        <link rel="icon" href="../logo/circle.png" sizes="32x32" type="image/png" />
+				<link rel="icon" href="../logo/circle.png" sizes="32x32" type="image/png" />
 			</Head>
 
-			<main
-				className={styles.mainBody}
-				style={{ padding: "30px" }}
-			>
+			<main className={styles.mainBody} style={{ padding: "30px" }} >
 				<div style={{ margin: "10px" }}>
-					<div
-						className={`fixed-top ${edit.fixedHeader}`}
-					>
+					<div className={`fixed-top ${edit.fixedHeader}`} >
 						<div>
-							<Container
-								className={
-									global.headerContainer
-								}
-							>
-								<Image
-									className={
-										global.circleLogo
-									}
-									src="../logo/circle.png"
-								></Image>
-								<Image
-									className={
-										global.nameLogo
-									}
-									src="../logo/name.png"
-								></Image>
+							<Container className={global.headerContainer}>
+								<Image className={global.circleLogo} src="../logo/circle.png" ></Image>
+								<Image className={global.nameLogo} src="../logo/name.png" ></Image>
 							</Container>
 						</div>
-						<div
-							className={
-								edit.btnContainer
-							}
-						>
-							<Button
-								variant="contained"
-								color="primary"
-								onClick={
-									handleShow1
-								}
-							>
+						<div className={edit.btnContainer} >
+							<Button variant="contained" color="primary" onClick={handleShow1} >
 								Home
 							</Button>
-							<Button
-								variant="contained"
-								className="primary"
-								onClick={
-									handleSave
-								}
-							>
+							<Button variant="contained" className="primary" onClick={handleSave}>
 								Save here
 							</Button>
-							<Button
-								variant="contained"
-								color="secondary"
-								onClick={
-									handleDownload
-								}
-							>
+							<Button variant="contained" color="secondary" onClick={handleDownload}>
 								Download
 							</Button>
-							<Button
-								variant="contained"
-								color="secondary"
-								onClick={
-									toggleShow
-								}
-								className="me-2"
-							>
+							<Button variant="contained" color="secondary" onClick={toggleShow} className="me-2" >
 								Text Correction
 							</Button>
 						</div>
@@ -265,54 +206,23 @@ export default function EditDocument() {
 				</div>
 				<div style={{ marginTop: "130px" }}>
 					<div>
-						<Modal
-							show={show1}
-							onHide={handleClose1}
-						>
-							<Modal.Header
-								closeButton
-							>
+						<Modal show={show1} onHide={handleClose1} >
+							<Modal.Header closeButton >
 								<Modal.Title className={edit.offCanvasTitle}>
-                Make sure to save what you're working on!
+									Make sure to save what you're working on!
 								</Modal.Title>
 							</Modal.Header>
-              <ModalBody className={
-										edit.image1
-									}>
-              <Image
-									
-									src="../Image1.png"
-								></Image>
-              </ModalBody>
+							<ModalBody className={edit.image1}>
+								<Image src="../Image1.png" ></Image>
+							</ModalBody>
 							<Modal.Footer>
-								<Button
-									variant="contained"
-                  color="secondary"
-									onClick={
-										handleClose1
-									}
-								>
-									Close
-								</Button>
-								<Button
-									variant="contained"
-                  color="primary"
-									onClick={
-										handleSaveAndLeave
-									}
-								>
-									Save
-									Changes
-								</Button>
+								<Button variant="contained" color="secondary" onClick={handleClose1} >  Close  </Button>
+								<Button variant="contained" color="primary" onClick={handleSaveAndLeave}  >  Save  Changes  </Button>
 							</Modal.Footer>
 						</Modal>
 					</div>
 					<div>
-						<h1
-							className={
-								edit.documentName
-							}
-						>
+						<h1 className={edit.documentName}>
 							{documentName}
 						</h1>
 					</div>
@@ -326,7 +236,7 @@ export default function EditDocument() {
 					{(!isLoading) &&
 						<div>
 							<ReactQuill
-								// ref={quillRef}
+								// ref={quillRef}  
 								theme="snow"
 								value={docxContent}
 								onChange={setDocxContent}
@@ -344,20 +254,12 @@ export default function EditDocument() {
 						>
 							<Offcanvas.Body>
 								<div>
-									<TextCorrectionForm
-										onSubmit={
-											handleSubmit
-										}
-									/>
+									<TextCorrectionForm onSubmit={handleSubmit} />
 									{correctedText && (
 										<div>
-											<h2>
-												Corrected:
-											</h2>
+											<h2>Corrected:</h2>
 											<p>
-												{
-													correctedText
-												}
+												{correctedText}
 											</p>
 										</div>
 									)}
