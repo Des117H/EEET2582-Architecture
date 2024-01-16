@@ -76,6 +76,7 @@ const Welcome = () => {
 		<div>
 			<header>
 				<AppHeader />
+				<link rel="icon" href="../logo/circle.png" sizes="32x32" type="image/png" />
 			</header>
 			<main className={styles.mainBody}>
 				<Stack direction="horizontal" gap={10}>

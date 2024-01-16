@@ -9,6 +9,7 @@ const Account = () => {
             <header>
                 <script async src="https://js.stripe.com/v3/buy-button.js" />
                 <AppHeader />
+                <link rel="icon" href="../logo/circle.png" sizes="32x32" type="image/png" />
             </header>
             <main>
                 <stripe-buy-button

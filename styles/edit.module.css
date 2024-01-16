@@ -25,6 +25,12 @@
     background-color: #fff; 
   }
 
+.image1{
+display: flex;
+justify-content: center;
+
+}
+
 .offCanvasTitle{
     color: var(--primary);
     font-size: 20px;
@@ -34,8 +40,5 @@
 .textArea{
     border: 3px solid var(--secondary);
     width: 100%;
-}
-
-.labelTitle{
-
+    height: 150px;
 }

@@ -188,6 +188,7 @@ export default function dashboard() {
 		<div>
 			<Head>
 				<title>Dashboard</title>
+				<link rel="icon" href="../logo/circle.png" sizes="32x32" type="image/png" />
 			</Head>
 			
 			<div>
