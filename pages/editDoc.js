@@ -2,7 +2,10 @@
 
 import AppFooter from "../components/app.footer";
 import { useRouter } from "next/router";
-import { Button } from "@mui/material";
+import {
+	CircularProgress,
+	Button
+} from "@mui/material";
 import Offcanvas from "react-bootstrap/Offcanvas";
 import Modal from 'react-bootstrap/Modal';
 import Image from "react-bootstrap/Image";
@@ -35,8 +38,8 @@ export default function EditDocument() {
 	const [show1, setShow1] = useState(false);
 
 	const [isSaved, setIsSaved] = useState(false);
-	const [isSaveClicked, setIsSaveClicked] = useState(false);
 	const [isOpen, setIsOpen] = useState(false);
+	const [isLoading, setIsLoading] = useState(true);
 
 	const handleClose = () => setShow(false);
 	const toggleShow = () => setShow((s) => !s);
@@ -64,6 +67,7 @@ export default function EditDocument() {
 				);
 
 				setDocxContent(htmlWithoutImages);
+				setIsLoading(false);
 				setIsSaved(false);
 			})
 			.catch((error) => {
@@ -116,9 +120,9 @@ export default function EditDocument() {
 
 			if (response.ok) {
 				const docxBlob = await response.blob();
-				const url =
-					window.URL.createObjectURL(docxBlob);
-				window.open(url, "_blank");
+				const url = window.URL.createObjectURL(docxBlob);
+				window.open(url, '_blank');
+				// setIsLoading(false);
 			}
 		} catch (error) {
 			console.error(
@@ -312,16 +316,23 @@ export default function EditDocument() {
 							{documentName}
 						</h1>
 					</div>
-					<div>
-						<ReactQuill
-							// ref={quillRef}
-							theme="snow"
-							value={docxContent}
-							onChange={
-								setDocxContent
-							}
+
+					{(isLoading) &&
+						<CircularProgress
+							color="inherit"
+							sx={{ marginLeft: "50%", marginTop: "25%" }}
 						/>
-					</div>
+					}
+					{(!isLoading) &&
+						<div>
+							<ReactQuill
+								// ref={quillRef}
+								theme="snow"
+								value={docxContent}
+								onChange={setDocxContent}
+							/>
+						</div>
+					}
 
 					<>
 						<Offcanvas

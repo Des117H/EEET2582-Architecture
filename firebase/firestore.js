@@ -25,6 +25,7 @@ export function addDocument(uid, date, documentBucket) {
  */
 export async function getDocumentsMvp(uid) {
 	const documents = query(collection(db, DOCUMENT_COLLECTION), where("uid", "==", uid), orderBy("date", "desc"));
+	console.log(documents);
 	return await processDocuments(documents);
 }
 

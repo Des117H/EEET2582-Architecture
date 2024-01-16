@@ -105,10 +105,8 @@ export default function dashboard() {
 			async function fetchData() {
 				await getAndSetDocuments();
 			}
-			fetchData();
-
 			setIsLoadingDocuments(true);
-			setIsLoadingDocuments(false);
+			fetchData();
 		}
 	}, [authUser, ocrFeatureFlag]);
 
@@ -117,9 +115,13 @@ export default function dashboard() {
 		setSnackbarMessage(
 			isSuccess ? SUCCESS_MAP[documentEnum] : ERROR_MAP[documentEnum]
 		);
+
 		isSuccess ? setSuccessSnackbar(true) : setErrorSnackbar(true);
+
 		setAction(DOCUMENTS_ENUM.none);
+
 		if (isSuccess) {
+			setIsLoadingDocuments(false);
 			getAndSetDocuments();
 		}
 	};
@@ -163,6 +165,7 @@ export default function dashboard() {
 	const getDocumentRows = (documents) => {
 		const zeroStateText = "No past documents";
 		const actionEnum = DOCUMENTS_ENUM.edit;
+
 		return documents.length > 0 ? (
 			documents.map((document) => (
 				<div key={document.id}>
@@ -190,7 +193,7 @@ export default function dashboard() {
 				<title>Dashboard</title>
 				<link rel="icon" href="../logo/circle.png" sizes="32x32" type="image/png" />
 			</Head>
-			
+
 			<div>
 				<AppHeader />
 			</div>
@@ -229,18 +232,9 @@ export default function dashboard() {
 							<AddIcon />
 						</IconButton>
 					</Stack>
-					{getDocumentRows(
-						ocrFeatureFlag ? pastDocuments : allDocuments
-					)}
+					{getDocumentRows(ocrFeatureFlag ? pastDocuments : allDocuments)}
 				</Container>
-				<DocumentDialog
-					key={action}
-					document={updateDocument}
-					action={action}
-					onError={(documentEnum) => onResult(documentEnum, false)}
-					onSuccess={(documentEnum) => onResult(documentEnum, true)}
-					onCloseDialog={() => onCloseDocumentDialog()}
-				></DocumentDialog>
+
 				<Dialog open={action === DOCUMENTS_ENUM.delete} onClose={resetDelete}>
 					<Typography variant="h4" className={styles.title}>
 						DELETE DOCUMENT
