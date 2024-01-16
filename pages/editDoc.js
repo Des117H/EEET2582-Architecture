@@ -146,8 +146,8 @@ export default function EditDocument() {
 			{
 				method: "GET",
 				headers: new Headers({
-					// "Content-Type": "application/json",n
-					"ngrok-skip-browser-warning": "69420",
+					"Content-Type": "application/json",
+					// "ngrok-skip-browser-warning": "69420",
 				}),
 			}
 		);
