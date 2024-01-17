@@ -1,4 +1,23 @@
 {
+  "database": {
+    "rules": "database.rules.json"
+  },
+  "firestore": {
+    "rules": "firestore.rules",
+    "indexes": "firestore.indexes.json"
+  },
+  "functions": [
+    {
+      "source": "functions",
+      "codebase": "default",
+      "ignore": [
+        "node_modules",
+        ".git",
+        "firebase-debug.log",
+        "firebase-debug.*.log"
+      ]
+    }
+  ],
   "hosting": {
     "source": ".",
     "ignore": [
@@ -9,5 +28,8 @@
     "frameworksBackend": {
       "region": "asia-east1"
     }
+  },
+  "storage": {
+    "rules": "storage.rules"
   }
 }

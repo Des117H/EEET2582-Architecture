@@ -11,7 +11,7 @@ Example account:
     Email: testnguyen@gmail.com
     Password: 123456
 Description of the system including all features implemented:
-    1. ingle sign on with OAuth2: Email/Password, Google, Github, GameCenter
+    1. Single sign on with OAuth2: Email/Password, Google, Github, GameCenter
 Design of the system including what components and technologies:
     1. NPM
     2. Firebase

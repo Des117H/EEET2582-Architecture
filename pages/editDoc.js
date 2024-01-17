@@ -48,7 +48,10 @@ export default function EditDocument() {
 
 	const bucket = router.query.data;
 	const docName = bucket;
-	const parts = docName.split("/");
+	var parts = [];
+	if (docName != null) {
+		parts = docName.split("/");
+	}
 	const documentName = parts[parts.length - 1];
 
 	const uid = auth.uid;
@@ -61,20 +64,14 @@ export default function EditDocument() {
 				const result = await mammoth.convertToHtml({
 					arrayBuffer: docxBuffer,
 				});
-				const htmlWithoutImages = result.value.replace(
-					/<img[^>]*>/g,
-					""
-				);
+				const htmlWithoutImages = result.value.replace(/<img[^>]*>/g, "");
 
 				setDocxContent(htmlWithoutImages);
 				setIsLoading(false);
 				setIsSaved(false);
 			})
 			.catch((error) => {
-				console.error(
-					"Error fetching the .docx file:",
-					error
-				);
+				console.error("Error fetching the .docx file:", error);
 			});
 	}, []);
 
@@ -122,13 +119,10 @@ export default function EditDocument() {
 				const docxBlob = await response.blob();
 				const url = window.URL.createObjectURL(docxBlob);
 				window.open(url, '_blank');
-				// setIsLoading(false);
+				setIsLoading(false);
 			}
 		} catch (error) {
-			console.error(
-				"Error converting or rendering DOCX:",
-				error
-			);
+			console.error("Error converting or rendering DOCX:", error);
 			// Handle error
 		}
 	};
@@ -234,14 +228,12 @@ export default function EditDocument() {
 						/>
 					}
 					{(!isLoading) &&
-						<div>
-							<ReactQuill
-								// ref={quillRef}  
-								theme="snow"
-								value={docxContent}
-								onChange={setDocxContent}
-							/>
-						</div>
+						<ReactQuill
+							// ref={quillRef}  
+							theme="snow"
+							value={docxContent}
+							onChange={setDocxContent}
+						/>
 					}
 
 					<>

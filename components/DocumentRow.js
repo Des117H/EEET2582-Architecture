@@ -2,7 +2,6 @@ import { Avatar, IconButton, Stack, Typography } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import DescriptionIcon from '@mui/icons-material/Description';
-import { format } from 'date-fns';
 import styles from '../styles/css/documentRow.module.css';
 import Link from 'next/link'
 import { useRouter } from "next/router";
@@ -26,13 +25,53 @@ export default function DocumentRow(props) {
 	const router = useRouter();
 
 	const documentDate = () => {
-		return format(document.date, "yyyy/MM/dd");
+		const date = document.date.split(' ');
+		var month = "";
+		switch (date[1]) {
+			case 'Jan':
+				month = "01";
+				break;
+			case 'Feb':
+				month = "02";
+				break;
+			case 'Mar':
+				month = "03";
+				break;
+			case 'Apr':
+				month = "04";
+				break;
+			case 'May':
+				month = "05";
+				break;
+			case 'June':
+				month = "06";
+				break;
+			case 'July':
+				month = "07";
+				break;
+			case 'Aug':
+				month = "08";
+				break;
+			case 'Sept':
+				month = "09";
+				break;
+			case 'Oct':
+				month = 10;
+				break;
+			case 'Nov':
+				month = 11;
+				break;
+			case 'Dec':
+				month = 12;
+				break;
+		}
+		return date[3] + '/' + month + '/' + date[2];
 	}
 	const passDocument = () => {
 		props.onEdit;
 		router.push({
 			pathname: '/editDoc',
-			query: {data: document.documentBucket},
+			query: { data: document.documentBucket },
 		});
 	}
 

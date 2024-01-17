@@ -7,8 +7,15 @@ import { Stack, Modal, Image } from "react-bootstrap";
 import { useEffect, useState } from "react";
 import Head from "next/head";
 import { useRouter } from "next/router";
-import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth";
-import { EmailAuthProvider, GoogleAuthProvider, GithubAuthProvider } from "firebase/auth";
+import {
+	getAuth,
+	signInWithPopup,
+	signOut,
+	onAuthStateChanged,
+	EmailAuthProvider,
+	GoogleAuthProvider,
+	GithubAuthProvider
+} from "firebase/auth";
 import {
 	Button,
 	CircularProgress,
@@ -34,7 +41,78 @@ const uiConfig = {
 	],
 };
 
+const emailProvider = new EmailAuthProvider();
+const googleProvider = new GoogleAuthProvider();
+const githubProvider = new GithubAuthProvider();
 
+var credential = "";
+var user = "";
+var token = "";
+
+async function SignInOptions(options) {
+	if (options == "Email") {
+		try {
+			const result = await signInWithPopup(auth, emailProvider);
+
+			const { isNewUser } = getAdditionalUserInfo(result);
+
+			if (isNewUser) {
+				await auth.currentUser.delete();
+				throw new Error(`${email} is not registered.`);
+			} else navigate(`/${auth.currentUser.tenantId}/projects`);
+
+			user = result.user;
+			credential = provider.credentialFromResult(auth, result);
+			token = credential.accessToken;
+		} catch (error) {
+			console.error("Error signing in with Email", error);
+			if (error.code === "auth/account-exists-with-different-credential") {
+				const test = OAuthProvider.credentialFromError(error);
+				console.log("test", test);
+			} else throw error;
+		}
+	} else if (options == "Google") {
+		try {
+			const result = await signInWithPopup(auth, googleProvider);
+			const { isNewUser } = getAdditionalUserInfo(result);
+
+			if (isNewUser) {
+				await auth.currentUser.delete();
+				throw new Error(`${email} is not registered.`);
+			} else navigate(`/${auth.currentUser.tenantId}/projects`);
+
+			user = result.user;
+			credential = provider.credentialFromResult(auth, result);
+			token = credential.accessToken;
+		} catch (error) {
+			console.error("Error signing in with Google", error);
+			if (error.code === "auth/account-exists-with-different-credential") {
+				const test = OAuthProvider.credentialFromError(error);
+				console.log("test", test);
+			} else throw error;
+		}
+	} else if (options == "Github") {
+		try {
+			const result = await signInWithPopup(auth, githubProvider);
+			const { isNewUser } = getAdditionalUserInfo(result);
+
+			if (isNewUser) {
+				await auth.currentUser.delete();
+				throw new Error(`${email} is not registered.`);
+			} else navigate(`/${auth.currentUser.tenantId}/projects`);
+
+			user = result.user;
+			credential = provider.credentialFromResult(auth, result);
+			token = credential.accessToken;
+		} catch (error) {
+			console.error("Error signing in with Github", error);
+			if (error.code === "auth/account-exists-with-different-credential") {
+				const test = OAuthProvider.credentialFromError(error);
+				console.log("test", test);
+			} else throw error;
+		}
+	}
+}
 
 function LoginModal(props) {
 	return (
@@ -50,7 +128,13 @@ function LoginModal(props) {
 				</Modal.Title>
 			</Modal.Header>
 			<Modal.Body>
-				<StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={auth} />
+				{/* <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={auth} /> */}
+				{/* <AuthContext.Provider value={{ user, googleSignIn, logOut }}>
+					{children}
+				</AuthContext.Provider> */}
+				<Button onClick={() => SignInOptions("Email")}>Sign in with Email</Button>
+				<Button onClick={() => SignInOptions("Google")}>Sign in with Google</Button>
+				<Button onClick={() => SignInOptions("Github")}>Sign in with Github</Button>
 			</Modal.Body>
 			<Modal.Footer>
 				<Button variant="contained" color="secondary" onClick={props.onHide}>Close</Button>
