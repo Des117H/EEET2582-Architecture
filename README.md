@@ -26,4 +26,3 @@ Our web application system corrects and provides feedback on text using modern t
     1. NPM
     2. Firebase
     3. Next.js, HTML, CSS
-    4. 
