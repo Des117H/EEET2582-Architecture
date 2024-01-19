@@ -235,6 +235,15 @@ export default function dashboard() {
 					{getDocumentRows(ocrFeatureFlag ? pastDocuments : allDocuments)}
 				</Container>
 
+				<DocumentDialog
+					key={action}
+					document={updateDocument}
+					action={action}
+					onError={(documentEnum) => onResult(documentEnum, false)}
+					onSuccess={(documentEnum) => onResult(documentEnum, true)}
+					onCloseDialog={() => onCloseDocumentDialog()}
+				></DocumentDialog>
+
 				<Dialog open={action === DOCUMENTS_ENUM.delete} onClose={resetDelete}>
 					<Typography variant="h4" className={styles.title}>
 						DELETE DOCUMENT
