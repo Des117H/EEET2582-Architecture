@@ -8,12 +8,14 @@ Our web application system corrects and provides feedback on text using modern t
 # URL of the online deployment: 
 [grandmaly.net](https://grandmaly.net/)
 # Basic instructions on how to run the system including login info if needed:
-**Needed to turn on CORS for loading and saving document.**\n
+**Needed to turn on CORS for loading and saving document.**
+
 Run locally: 
 ```
 npm i
 npm run dev
 ```
+
 Example account: 
     Email: testnguyen@gmail.com
     Password: 123456
