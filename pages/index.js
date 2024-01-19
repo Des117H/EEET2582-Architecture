@@ -14,6 +14,8 @@ import {
   EmailAuthProvider,
   GoogleAuthProvider,
   GithubAuthProvider,
+  signInWithEmailAndPassword,
+  createUserWithEmailAndPassword,
 } from "firebase/auth";
 import {
   Button,
@@ -50,26 +52,23 @@ var token = "";
 
 async function SignInOptions(options) {
   if (options == "Email") {
-    try {
-      const result = await signInWithPopup(auth, emailProvider);
-
-      const { isNewUser } = getAdditionalUserInfo(result);
-
-      if (isNewUser) {
-        await auth.currentUser.delete();
-        throw new Error(`${email} is not registered.`);
-      } else navigate(`/${auth.currentUser.tenantId}/projects`);
-
-      user = result.user;
-      credential = provider.credentialFromResult(auth, result);
-      token = credential.accessToken;
-    } catch (error) {
-      console.error("Error signing in with Email", error);
-      if (error.code === "auth/account-exists-with-different-credential") {
-        const test = OAuthProvider.credentialFromError(error);
-        console.log("test", test);
-      } else throw error;
-    }
+    // try {
+    //   const result = await signInWithPopup(auth, emailProvider);
+    //   const { isNewUser } = getAdditionalUserInfo(result);
+    //   if (isNewUser) {
+    //     await auth.currentUser.delete();
+    //     throw new Error(`${email} is not registered.`);
+    //   } else navigate(`/${auth.currentUser.tenantId}/projects`);
+    //   user = result.user;
+    //   credential = provider.credentialFromResult(auth, result);
+    //   token = credential.accessToken;
+    // } catch (error) {
+    //   console.error("Error signing in with Email", error);
+    //   if (error.code === "auth/account-exists-with-different-credential") {
+    //     const test = OAuthProvider.credentialFromError(error);
+    //     console.log("test", test);
+    //   } else throw error;
+    // }
   } else if (options == "Google") {
     try {
       const result = await signInWithPopup(auth, googleProvider);
@@ -114,14 +113,51 @@ async function SignInOptions(options) {
 }
 
 function LoginModal(props) {
+  const [showLoginForm, setShowLoginForm] = useState(true);
+  const [showSignUpForm, setShowSignUpForm] = useState(true);
 
-	const [showLoginForm, setShowLoginForm] = useState(true);
-	
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleFormSubmit = async (e) => {
+    try {
+      if (showLoginForm) {
+        // Handle login form submission
+        const userCredential = await signInWithEmailAndPassword(
+          auth,
+          email,
+          password
+        );
+        console.log(userCredential.user);
+      } else {
+        const userCredential = await createUserWithEmailAndPassword(
+			auth,
+			email,
+			password
+		  );
+		  console.log(userCredential.user);
+      }
+    } catch (error) {
+      alert("Authentication Error, please check your email or password.");
+      console.error("Authentication Error", error);
+      // Handle error as needed
+    }
+  };
+
+  const handleCreate = async (e) => {};
+
   function toggleSignup() {
-	
     setShowLoginForm((prevShowLoginForm) => !prevShowLoginForm);
+    setShowSignUpForm((prevShowSignUpForm) => !prevShowSignUpForm);
   }
 
+  const handleEmailChange = (e) => {
+    setEmail(e.target.value);
+  };
+
+  const handlePasswordChange = (e) => {
+    setPassword(e.target.value);
+  };
 
   return (
     <Modal
@@ -136,80 +172,115 @@ function LoginModal(props) {
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <div className="login-form" style={{ display: showLoginForm ? "block" : "none" }}>
-          <h1 class="text-center mb-4 title">LOGIN</h1>
-          <form id="loginForm">
-            <div class="mb-3">
-              <label for="loginEmail" class="form-label">
-                Email address
-              </label>
-              <input
-                type="email"
-                class="form-control"
-                id="loginEmail"
-                required
-              />
-            </div>
-            <div class="mb-3">
-              <label for="loginPassword" class="form-label">
-                Password
-              </label>
-              <input
-                type="password"
-                class="form-control"
-                id="loginPassword"
-                required
-              />
-            </div>
-            <button type="submit" class="btn btn-primary">
-              Login
-            </button>
-          </form>
-          <div className="signup-form" style={{ display: showLoginForm ? "none" : "block" }}>
-            <h2 class="text-center mb-4 title">SIGN UP</h2>
-
-            <form>
-              <div class="mb-3">
-                <label for="signupEmail" class="form-label">
+        <div className="login-form">
+          <div style={{ display: showLoginForm ? "block" : "none" }}>
+            <h1 className="text-center mb-4 title">LOGIN</h1>
+            <form id="loginForm">
+              <div className="mb-3">
+                <label for="loginEmail" className="form-label">
                   Email address
                 </label>
                 <input
                   type="email"
-                  class="form-control"
-                  id="signupEmail"
+                  className="form-control"
+                  id="loginEmail"
                   required
+                  value={email}
+                  onChange={handleEmailChange}
                 />
               </div>
-              <div class="mb-3">
-                <label for="signupPassword" class="form-label">
+              <div className="mb-3">
+                <label for="loginPassword" className="form-label">
                   Password
                 </label>
                 <input
                   type="password"
-                  class="form-control"
-                  id="signupPassword"
+                  className="form-control"
+                  id="loginPassword"
                   required
+                  value={password}
+                  onChange={handlePasswordChange}
                 />
               </div>
-              <button type="submit" class="btn btn-success btn_secondary">
+              <Button
+                type="button"
+                className="btn btn-primary"
+                onClick={() => handleFormSubmit()}
+              >
+                Login
+              </Button>
+            </form>
+          </div>
+          <div
+            className="signup-form"
+            style={{ display: showSignUpForm ? "none" : "block" }}
+          >
+            <h2 className="text-center mb-4 title">SIGN UP</h2>
+
+            <form>
+              <div className="mb-3">
+                <label for="signupEmail" className="form-label">
+                  Email address
+                </label>
+                <input
+                  type="email"
+                  className="form-control"
+                  id="signupEmail"
+                  required
+                  value={email}
+                  onChange={handleEmailChange}
+                />
+              </div>
+              <div className="mb-3">
+                <label for="signupPassword" className="form-label">
+                  Password
+                </label>
+                <input
+                  type="password"
+                  className="form-control"
+                  id="signupPassword"
+                  required
+                  value={password}
+                  onChange={handlePasswordChange}
+                />
+              </div>
+              <Button
+                type="button"
+                className="btn btn-success btn_secondary"
+				onClick={() => handleFormSubmit()}
+              >
                 Sign Up
-              </button>
+              </Button>
             </form>
           </div>
 
-          <p class="text-center mt-3">
+          <p className="text-center mt-3">
             Don't have an account?
-            <button onclick = {()=> toggleSignup()}>
+            <Button
+              variant="contained"
+              color="secondary"
+              onClick={() => toggleSignup()}
+            >
               Sign Up
-            </button>
+            </Button>
           </p>
         </div>
-        <Button onClick={() => SignInOptions("Google")}>
-          Sign in with Google
-        </Button>
-        <Button onClick={() => SignInOptions("Github")}>
-          Sign in with Github
-        </Button>
+        <div className={styles.buttonContainer}>
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={() => SignInOptions("Google")}
+          >
+            Sign in with Google
+          </Button>
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={() => SignInOptions("Github")}
+          >
+            Sign in with Github
+          </Button>
+        </div>
       </Modal.Body>
       <Modal.Footer>
         <Button variant="contained" color="secondary" onClick={props.onHide}>
@@ -224,7 +295,6 @@ const Welcome = () => {
   const router = useRouter();
   const { authUser, isLoading } = useAuth();
   const [login, setLogin] = useState(false);
-  const [showLoginForm, setShowLoginForm] = useState(true);
 
   if (authUser) {
     router.push("/dashboard");

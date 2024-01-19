@@ -28,6 +28,11 @@
     border-left: var(--secondary) double 10px;
 }
 
+.buttonContainer{
+    display: flex;
+    justify-content: space-evenly;
+}
+
 
 /* Main */
 .mainBody {
